@@ -2,5 +2,9 @@
 
 ## Development
 
-- Run `npm run dev:prepare` to generate type stubs.
-- Use `npm run dev` to start [playground](./playground) in development mode.
+- Run `pnpm i --shamefully-hoist` to install the dependencies.
+- Run `pnpm dev:prepare` to generate type stubs.
+- Run `pnpm dev` to start playground in development mode.
+- Run `pnpm dev:build` to build playground.
+- Run `pnpm dev:start` to locally preview playground.
+- Use `pnpm build` to build this project.
