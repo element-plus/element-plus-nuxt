@@ -1,5 +1,5 @@
 import { defineNuxtModule } from '@nuxt/kit'
-import { resolveComponent } from './core/index'
+import { resolveComponent, resolveImports } from './core/index'
 import type { ElementPlusModuleOptions } from './types'
 
 export default defineNuxtModule<ElementPlusModuleOptions>({
@@ -10,6 +10,7 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
   setup (options, nuxt) {
     const config = options || nuxt.options.elementPlus
 
-    resolveComponent(config)
+    nuxt.options.imports.autoImport !== false && resolveImports(config)
+    nuxt.options.components !== false && resolveComponent(config)
   }
 })

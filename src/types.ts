@@ -1,6 +1,6 @@
 type PresetComponent = string | [name: string, from?: string]
 
-type PresetImport = string | [name: string, as?: string, from?: string]
+export type PresetImport = string | [name: string, as?: string, from?: string]
 
 export interface ElementPlusModuleOptions {
   components?: PresetComponent[]
