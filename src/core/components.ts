@@ -1,7 +1,7 @@
 import { addComponent } from '@nuxt/kit'
 import AllComponents from 'element-plus/es/component'
 import type { Component } from 'vue'
-import { isArray } from '../utils'
+import { isArray, toArray } from '../utils'
 import type { ElementPlusModuleOptions } from '../types'
 
 export function resolveComponent (config: ElementPlusModuleOptions) {
@@ -13,7 +13,7 @@ export function resolveComponent (config: ElementPlusModuleOptions) {
   ])
 
   components.forEach((item) => {
-    const [name, from] = isArray(item) ? item : [item]
+    const [name, from] = toArray(item)
 
     addComponent({
       name,
