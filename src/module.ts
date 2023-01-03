@@ -1,24 +1,31 @@
-import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
-
-export interface ModuleOptions {
-  addPlugin: boolean
-}
+import { defineNuxtModule, addComponent } from '@nuxt/kit'
+import AllComponents from 'element-plus/es/component'
+import type { Component } from 'vue'
+import { isArray } from './utils'
+import type { ModuleOptions } from './types'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt-element-plus',
     configKey: 'ElementPlus'
   },
-  defaults: {
-    addPlugin: true
-  },
   setup (options, nuxt) {
-    if (options.addPlugin) {
-      const { resolve } = createResolver(import.meta.url)
-      const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
-      nuxt.options.build.transpile.push(runtimeDir)
-      addPlugin(resolve(runtimeDir, 'plugin'))
-    }
+    const config = options || nuxt.options.elementPlus
+    const allComponents = (AllComponents as unknown as Component[])
+      .map(item => item.name!)
+    const components = new Set([
+      ...allComponents,
+      ...config.components || []
+    ])
+
+    components.forEach((item) => {
+      const [name, from] = isArray(item) ? item : [item]
+
+      addComponent({
+        name,
+        export: name,
+        filePath: from || 'element-plus'
+      })
+    })
   }
 })
