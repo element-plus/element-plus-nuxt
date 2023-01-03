@@ -2,16 +2,16 @@ type PresetComponent = string | [name: string, from?: string]
 
 type PresetImport = string | [name: string, as?: string, from?: string]
 
-export interface ModuleOptions {
+export interface ElementPlusModuleOptions {
   components?: PresetComponent[]
   imports?: PresetImport[]
 }
 
 declare module '@nuxt/schema' {
   interface NuxtConfig {
-    elementPlus?: ModuleOptions
+    elementPlus?: ElementPlusModuleOptions
   }
   interface NuxtOptions {
-    elementPlus?: ModuleOptions
+    elementPlus?: ElementPlusModuleOptions
   }
 }
