@@ -1,6 +1,13 @@
-import { allComponents, allNoStylesComponents } from '../config'
+import { allComponents, allNoStylesComponents, libraryName } from '../config'
 import { hyphenate } from '../utils'
 import type { ElementPlusModuleOptions } from '../types'
+
+export function getStyleDir (config: ElementPlusModuleOptions, name: string) {
+  const dir = hyphenate(name.slice(2))
+  const type = config.importStyle === 'sass' ? 'index' : 'css'
+
+  return `${libraryName}/es/components/${dir}/style/${type}`
+}
 
 export function resolveStyles (config: ElementPlusModuleOptions, name: string) {
   const noStylesComponents = new Set([
@@ -15,10 +22,5 @@ export function resolveStyles (config: ElementPlusModuleOptions, name: string) {
     return undefined
   }
 
-  if (/^El[A-Z]/.test(name)) {
-    const dir = hyphenate(name.slice(2))
-    const type = config.importStyle === 'sass' ? 'index' : 'css'
-
-    return `element-plus/es/components/${dir}/style/${type}`
-  }
+  return /^El[A-Z]/.test(name) ? getStyleDir(config, name) : undefined
 }

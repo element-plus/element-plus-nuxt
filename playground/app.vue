@@ -5,7 +5,16 @@ provide(ID_INJECTION_KEY, {
   prefix: 1024,
   current: 0
 })
+const loading = true
 const value = ref('Nuxt module playground!')
+
+const tableData = [
+  {
+    date: '2016-05-02',
+    name: 'John Smith',
+    address: 'No.1518,  Jinshajiang Road, Putuo District'
+  }
+]
 </script>
 
 <template>
@@ -14,5 +23,10 @@ const value = ref('Nuxt module playground!')
     <el-button type="success">
       buttton
     </el-button>
+    <el-table v-loading="loading" :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="Date" width="180" />
+      <el-table-column prop="name" label="Name" width="180" />
+      <el-table-column prop="address" label="Address" />
+    </el-table>
   </section>
 </template>

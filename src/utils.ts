@@ -1,3 +1,6 @@
+import { libraryName } from './config'
+import type { PresetImport } from './types'
+
 export function isArray (value: any): value is any[] {
   return Array.isArray(value)
 }
@@ -6,6 +9,19 @@ export function toArray<T extends any | any[]> (
   value: T
 ): T extends any[] ? T : T[] {
   return isArray(value) ? value : [value] as any
+}
+
+export function genLibImports (list: PresetImport[]): string {
+  const values = list.map((item) => {
+    if (isArray(item)) {
+      const [name, as] = item
+      return `${name} as ${as}`
+    }
+
+    return item
+  })
+
+  return `import {${values.join(',')}} from '${libraryName}';`
 }
 
 export function genSideEffectsImport (value: string): string {

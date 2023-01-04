@@ -1,5 +1,5 @@
 import { addComponent } from '@nuxt/kit'
-import { allComponents } from '../config'
+import { allComponents, libraryName } from '../config'
 import { toArray } from '../utils'
 import type { ElementPlusModuleOptions } from '../types'
 
@@ -15,7 +15,7 @@ export function resolveComponents (config: ElementPlusModuleOptions) {
     addComponent({
       name,
       export: name,
-      filePath: from || 'element-plus'
+      filePath: from || libraryName
     })
   })
 }
