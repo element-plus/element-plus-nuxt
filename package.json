@@ -32,7 +32,8 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:start": "node playground/.output/server/index.mjs",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "postinstall": "npm run dev:prepare"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0",
