@@ -1,4 +1,9 @@
-import { allComponents, allNoStylesComponents, libraryName } from '../config'
+import {
+  allComponents,
+  allImportsWithStyle,
+  allNoStylesComponents,
+  libraryName
+} from '../config'
 import { hyphenate } from '../utils'
 import type { ElementPlusModuleOptions } from '../types'
 
@@ -10,13 +15,17 @@ export function getStyleDir (config: ElementPlusModuleOptions, name: string) {
 }
 
 export function resolveStyles (config: ElementPlusModuleOptions, name: string) {
+  const components = new Set([
+    ...allComponents,
+    ...allImportsWithStyle
+  ])
   const noStylesComponents = new Set([
     ...allNoStylesComponents,
     ...config.noStylesComponents || []
   ])
 
   if (
-    !allComponents.includes(name) ||
+    !components.has(name) ||
     noStylesComponents.has(name)
   ) {
     return undefined

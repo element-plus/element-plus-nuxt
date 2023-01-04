@@ -7,12 +7,14 @@ export const libraryName = 'element-plus'
 export const allComponents = (AllComponents as unknown as Component[])
   .map(item => item.name!)
 
-export const allImports: PresetImport[] = [
+export const allImportsWithStyle: string[] = [
   'ElLoading',
   'ElMessage',
   'ElMessageBox',
   'ElNotification'
 ]
+
+export const allImports: PresetImport[] = allImportsWithStyle
 
 export const allNoStylesComponents: PresetComponent[] = [
   'ElAutoResizer',
