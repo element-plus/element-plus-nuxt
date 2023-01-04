@@ -1,6 +1,7 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import {
   resolveComponents,
+  resolveDirectives,
   resolveImports,
   resolveOptions,
   resolveStyles,
@@ -26,7 +27,8 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
       configs.plugins = configs.plugins || []
       configs.plugins.push(transformPlugin.vite({
         sourcemap: nuxt.options.sourcemap[mode],
-        transformStyles: name => resolveStyles(config, name)
+        transformStyles: name => resolveStyles(config, name),
+        transformDirectives: name => resolveDirectives(config, name)
       }))
     })
 
@@ -37,7 +39,8 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
           sourcemap: nuxt.options.sourcemap[mode],
-          transformStyles: name => resolveStyles(config, name)
+          transformStyles: name => resolveStyles(config, name),
+          transformDirectives: name => resolveDirectives(config, name)
         }))
       })
     })

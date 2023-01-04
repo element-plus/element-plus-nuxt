@@ -1,4 +1,5 @@
 export * from './components'
+export * from './directives'
 export * from './imports'
 export * from './nuxtOptions'
 export * from './styles'
