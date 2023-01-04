@@ -1,6 +1,7 @@
 {
-  "name": "nuxt-element-plus",
+  "name": "@element-plus/nuxt",
   "version": "1.0.0",
+  "description": "Element Plus module for Nuxt",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -14,6 +15,18 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "element-plus",
+    "nuxt"
+  ],
+  "homepage": "https://github.com/element-plus/element-plus-nuxt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/element-plus/element-plus-nuxt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/element-plus/element-plus-nuxt/issues"
+  },
   "scripts": {
     "build": "nuxt-module-build",
     "dev": "nuxi dev playground",
