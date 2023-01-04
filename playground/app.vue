@@ -15,12 +15,24 @@ const tableData = [
     address: 'No.1518,  Jinshajiang Road, Putuo District'
   }
 ]
+
+onMounted(() => {
+  ElNotification({
+    title: 'Success',
+    message: 'This is a success message',
+    type: 'success'
+  })
+})
+
+function hello () {
+  ElMessage.info('hello world')
+}
 </script>
 
 <template>
   <section>
     <el-input v-model="value" />
-    <el-button type="success">
+    <el-button type="success" @click="hello">
       buttton
     </el-button>
     <el-table v-loading="loading" :data="tableData" style="width: 100%">

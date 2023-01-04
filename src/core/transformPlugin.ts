@@ -1,10 +1,12 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
+import { allImportsWithStyle } from '../config'
 import {
   camelize,
   genLibImports,
   genSideEffectsImport,
-  toArray
+  toArray,
+  toRegExp
 } from '../utils'
 import type { PresetImport } from '../types'
 
@@ -18,12 +20,13 @@ interface TransformOptions {
 
 const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
 const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]*[^)]*\)/g
+const importsRegExp = toRegExp(allImportsWithStyle, 'g')
 
 export const transformPlugin = createUnplugin((options: TransformOptions) => {
   const { transformStyles, transformDirectives } = options
 
   return {
-    name: 'nuxt-element-plus:transform',
+    name: 'element-plus:transform',
     enforce: 'post',
     transform (code, id) {
       const imports = new Set<string>()
@@ -38,6 +41,11 @@ export const transformPlugin = createUnplugin((options: TransformOptions) => {
       }
 
       transformStyles && s.replace(componentsRegExp, (full, lazy, name) => {
+        addStyles(transformStyles(camelize(name)))
+        return full
+      })
+
+      transformStyles && s.replace(importsRegExp, (full, name) => {
         addStyles(transformStyles(camelize(name)))
         return full
       })

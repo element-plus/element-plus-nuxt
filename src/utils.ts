@@ -11,6 +11,10 @@ export function toArray<T extends any | any[]> (
   return isArray(value) ? value : [value] as any
 }
 
+export function toRegExp (arr: string[], flags?: string): RegExp {
+  return new RegExp(`(${arr.join('|')})`, flags)
+}
+
 export function genLibImports (list: PresetImport[]): string {
   const values = list.map((item) => {
     if (isArray(item)) {

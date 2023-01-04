@@ -11,7 +11,7 @@ import type { ElementPlusModuleOptions } from './types'
 
 export default defineNuxtModule<ElementPlusModuleOptions>({
   meta: {
-    name: 'nuxt-element-plus',
+    name: 'element-plus',
     configKey: 'ElementPlus'
   },
   setup (options, nuxt) {
