@@ -8,6 +8,14 @@ export function toArray<T extends any | any[]> (
   return isArray(value) ? value : [value] as any
 }
 
-export function genSideEffectsImport (str: string): string {
-  return `import '${str}';`
+export function genSideEffectsImport (value: string): string {
+  return `import '${value}';`
+}
+
+export function camelize (value: string): string {
+  return value.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
+}
+
+export function hyphenate (value: string): string {
+  return value.replace(/\B([A-Z])/g, '-$1').toLowerCase()
 }

@@ -1,6 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
-import { genSideEffectsImport, toArray } from '../utils'
+import { camelize, genSideEffectsImport, toArray } from '../utils'
 
 interface TransformOptions {
   sourcemap?: boolean
@@ -20,7 +20,7 @@ export const transformPlugin = createUnplugin((options: TransformOptions) => {
       const s = new MagicString(code)
 
       transformStyles && s.replace(componentsRegExp, (full, lazy, name) => {
-        const styles = transformStyles(name)
+        const styles = transformStyles(camelize(name))
 
         styles && toArray(styles).forEach((item) => {
           imports.add(genSideEffectsImport(item))

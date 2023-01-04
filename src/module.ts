@@ -1,5 +1,11 @@
 import { defineNuxtModule } from '@nuxt/kit'
-import { resolveComponent, resolveImports, resolveOptions, transformPlugin } from './core/index'
+import {
+  resolveComponents,
+  resolveImports,
+  resolveOptions,
+  resolveStyles,
+  transformPlugin
+} from './core/index'
 import type { ElementPlusModuleOptions } from './types'
 
 export default defineNuxtModule<ElementPlusModuleOptions>({
@@ -12,15 +18,15 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
 
     resolveOptions()
     nuxt.options.imports.autoImport !== false && resolveImports(config)
-    nuxt.options.components !== false && resolveComponent(config)
+    nuxt.options.components !== false && resolveComponents(config)
 
-    nuxt.hook('vite:extendConfig', (config, { isClient }) => {
+    nuxt.hook('vite:extendConfig', (configs, { isClient }) => {
       const mode = isClient ? 'client' : 'server'
 
-      config.plugins = config.plugins || []
-      config.plugins.push(transformPlugin.vite({
+      configs.plugins = configs.plugins || []
+      configs.plugins.push(transformPlugin.vite({
         sourcemap: nuxt.options.sourcemap[mode],
-        transformStyles: undefined // TODO:
+        transformStyles: name => resolveStyles(config, name)
       }))
     })
 
@@ -31,7 +37,7 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
           sourcemap: nuxt.options.sourcemap[mode],
-          transformStyles: undefined // TODO:
+          transformStyles: name => resolveStyles(config, name)
         }))
       })
     })

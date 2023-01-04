@@ -1,15 +1,10 @@
 import { addImportsSources } from '@nuxt/kit'
-import type { ElementPlusModuleOptions, PresetImport } from '../types'
+import { allImports } from '../config'
+import type { ElementPlusModuleOptions } from '../types'
 
 export function resolveImports (config: ElementPlusModuleOptions) {
-  const defaultImports: PresetImport[] = [
-    'ElLoading',
-    'ElMessage',
-    'ElMessageBox',
-    'ElNotification'
-  ]
   const imports = new Set([
-    ...defaultImports,
+    ...allImports,
     ...config.imports || []
   ])
 
