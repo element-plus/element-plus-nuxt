@@ -4,7 +4,12 @@ export type PresetImport = string | [name: string, as?: string, from?: string]
 
 export type PresetDirectives = Record<string, string | [directive: string, name?: string]>
 
-export interface ElementPlusModuleOptions {
+export interface TransformOptions {
+  include: RegExp[]
+  exclude: RegExp[]
+}
+
+export interface Options extends Partial<TransformOptions> {
   components?: PresetComponent[]
   directives?: PresetDirectives
   imports?: PresetImport[]
@@ -14,9 +19,9 @@ export interface ElementPlusModuleOptions {
 
 declare module '@nuxt/schema' {
   interface NuxtConfig {
-    elementPlus?: ElementPlusModuleOptions
+    elementPlus?: Options
   }
   interface NuxtOptions {
-    elementPlus?: ElementPlusModuleOptions
+    elementPlus?: Options
   }
 }

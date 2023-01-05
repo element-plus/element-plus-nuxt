@@ -1,6 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
-import { allImportsWithStyle } from '../config'
+import { allImportsWithStyle, transform } from '../config'
 import {
   camelize,
   genLibImports,
@@ -8,11 +8,11 @@ import {
   toArray,
   toRegExp
 } from '../utils'
-import type { PresetImport } from '../types'
+import type { PresetImport, TransformOptions } from '../types'
 
 type Style = string | string[]
 
-interface TransformOptions {
+interface PluginOptions extends Partial<TransformOptions> {
   sourcemap?: boolean
   transformStyles?: (name: string) => undefined | Style
   transformDirectives?: (name: string) => undefined | [name: string, styles?: Style]
@@ -22,12 +22,25 @@ const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"
 const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]*[^)]*\)/g
 const importsRegExp = toRegExp(allImportsWithStyle, 'g')
 
-export const transformPlugin = createUnplugin((options: TransformOptions) => {
-  const { transformStyles, transformDirectives } = options
+export const transformPlugin = createUnplugin((options: PluginOptions) => {
+  const {
+    include = transform.include,
+    exclude = transform.exclude,
+    transformStyles,
+    transformDirectives
+  } = options
 
   return {
     name: 'element-plus:transform',
     enforce: 'post',
+    transformInclude (id) {
+      if (exclude.some(pattern => id.match(pattern))) {
+        return false
+      }
+      if (include.some(pattern => id.match(pattern))) {
+        return true
+      }
+    },
     transform (code, id) {
       const imports = new Set<string>()
       const directives: PresetImport[] = []

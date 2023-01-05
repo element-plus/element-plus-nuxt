@@ -7,9 +7,9 @@ import {
   resolveStyles,
   transformPlugin
 } from './core/index'
-import type { ElementPlusModuleOptions } from './types'
+import type { Options } from './types'
 
-export default defineNuxtModule<ElementPlusModuleOptions>({
+export default defineNuxtModule<Options>({
   meta: {
     name: 'element-plus',
     configKey: 'ElementPlus'
@@ -26,6 +26,8 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
 
       configs.plugins = configs.plugins || []
       configs.plugins.push(transformPlugin.vite({
+        include: config.include,
+        exclude: config.exclude,
         sourcemap: nuxt.options.sourcemap[mode],
         transformStyles: name => resolveStyles(config, name),
         transformDirectives: name => resolveDirectives(config, name)
@@ -38,6 +40,8 @@ export default defineNuxtModule<ElementPlusModuleOptions>({
 
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
+          include: config.include,
+          exclude: config.exclude,
           sourcemap: nuxt.options.sourcemap[mode],
           transformStyles: name => resolveStyles(config, name),
           transformDirectives: name => resolveDirectives(config, name)

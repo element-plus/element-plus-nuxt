@@ -1,17 +1,20 @@
 import { allDirectives } from '../config'
 import { toArray } from '../utils'
-import type { ElementPlusModuleOptions } from '../types'
+import type { Options } from '../types'
 import { getStyleDir } from './index'
 
 export function resolveDirectives (
-  config: ElementPlusModuleOptions,
+  config: Options,
   name: string
 ): undefined | [name: string, styles?: string] {
-  const directives = Object.assign(allDirectives, config.directives)
+  const directives = {
+    ...allDirectives,
+    ...config.directives
+  }
 
   if (directives[name]) {
     const [directive, styleName] = toArray(directives[name])
-    const style = styleName ? getStyleDir(config, styleName) : undefined
+    const style = styleName && getStyleDir(config, styleName)
 
     return [directive, style]
   }
