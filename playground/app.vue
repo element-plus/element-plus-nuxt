@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { $message } from './utils'
 
-const loading = true
+const { t } = useLocale()
 const value = ref('Nuxt module playground!')
+const loading = true
 
 const tableData = [
   {
@@ -29,7 +30,7 @@ function hello () {
   <section>
     <el-input v-model="value" />
     <el-button type="success" @click="hello">
-      buttton
+      {{ t('el.colorpicker.confirm') }}
     </el-button>
     <el-table v-loading="loading" :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="Date" width="180" />

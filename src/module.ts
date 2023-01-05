@@ -1,4 +1,5 @@
 import { addPluginTemplate, defineNuxtModule } from '@nuxt/kit'
+import { defaults } from './config'
 import {
   resolveComponents,
   resolveDirectives,
@@ -10,29 +11,30 @@ import {
 } from './core/index'
 import type { Options } from './types'
 
-export default defineNuxtModule<Options>({
+export default defineNuxtModule<Partial<Options>>({
   meta: {
     name: 'element-plus',
-    configKey: 'ElementPlus'
+    configKey: 'elementPlus'
   },
-  setup (options, nuxt) {
-    const config = options || nuxt.options.elementPlus
+  defaults,
+  setup (_options, nuxt) {
+    const options = _options as Options
 
     resolveOptions()
-    addPluginTemplate(resolveInjection(config))
-    nuxt.options.imports.autoImport !== false && resolveImports(config)
-    nuxt.options.components !== false && resolveComponents(config)
+    addPluginTemplate(resolveInjection(options))
+    nuxt.options.imports.autoImport !== false && resolveImports(options)
+    nuxt.options.components !== false && resolveComponents(options)
 
-    nuxt.hook('vite:extendConfig', (configs, { isClient }) => {
+    nuxt.hook('vite:extendConfig', (config, { isClient }) => {
       const mode = isClient ? 'client' : 'server'
 
-      configs.plugins = configs.plugins || []
-      configs.plugins.push(transformPlugin.vite({
-        include: config.include,
-        exclude: config.exclude,
+      config.plugins = config.plugins || []
+      config.plugins.push(transformPlugin.vite({
+        include: options.include,
+        exclude: options.exclude,
         sourcemap: nuxt.options.sourcemap[mode],
-        transformStyles: name => resolveStyles(config, name),
-        transformDirectives: name => resolveDirectives(config, name)
+        transformStyles: name => resolveStyles(options, name),
+        transformDirectives: name => resolveDirectives(options, name)
       }))
     })
 
@@ -42,11 +44,11 @@ export default defineNuxtModule<Options>({
 
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
-          include: config.include,
-          exclude: config.exclude,
+          include: options.include,
+          exclude: options.exclude,
           sourcemap: nuxt.options.sourcemap[mode],
-          transformStyles: name => resolveStyles(config, name),
-          transformDirectives: name => resolveDirectives(config, name)
+          transformStyles: name => resolveStyles(options, name),
+          transformDirectives: name => resolveDirectives(options, name)
         }))
       })
     })

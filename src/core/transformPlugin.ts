@@ -1,6 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
-import { allImportsWithStyle, transform } from '../config'
+import { allImportsWithStyle } from '../config'
 import {
   camelize,
   genLibImports,
@@ -12,7 +12,7 @@ import type { PresetImport, TransformOptions } from '../types'
 
 type Style = string | string[]
 
-interface PluginOptions extends Partial<TransformOptions> {
+interface PluginOptions extends TransformOptions {
   sourcemap?: boolean
   transformStyles?: (name: string) => undefined | Style
   transformDirectives?: (name: string) => undefined | [name: string, styles?: Style]
@@ -23,12 +23,7 @@ const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]
 const importsRegExp = toRegExp(allImportsWithStyle, 'g')
 
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
-  const {
-    include = transform.include,
-    exclude = transform.exclude,
-    transformStyles,
-    transformDirectives
-  } = options
+  const { include, exclude, transformStyles, transformDirectives } = options
 
   return {
     name: 'element-plus:transform',

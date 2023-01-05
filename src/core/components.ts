@@ -1,20 +1,17 @@
 import { addComponent } from '@nuxt/kit'
-import { allComponents, libraryName } from '../config'
+import { libraryName } from '../config'
 import { toArray } from '../utils'
 import type { Options } from '../types'
 
 export function resolveComponents (config: Options) {
-  const components = new Set([
-    ...allComponents,
-    ...config.components || []
-  ])
+  const components = new Set(config.components)
 
   components.forEach((item) => {
-    const [name, from] = toArray(item)
+    const [name, alias, from] = toArray(item)
 
     addComponent({
       name,
-      export: name,
+      export: alias || name,
       filePath: from || libraryName
     })
   })
