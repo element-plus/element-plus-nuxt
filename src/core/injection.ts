@@ -1,9 +1,8 @@
-import { defaultInjectionID } from '../config'
 import type { Options } from '../types'
 
 /** Inject some additional configuration into Vue at runtime */
 export function resolveInjection (config: Options) {
-  const { injectionID = defaultInjectionID } = config
+  const { injectionID } = config
 
   return {
     filename: 'element-plus-injection.plugin.mjs',

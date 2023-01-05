@@ -1,16 +1,11 @@
 import AllComponents from 'element-plus/es/component'
 import type { Component } from 'vue'
 import type { ElIdInjectionContext } from 'element-plus'
-import type {
-  PresetComponent,
-  PresetDirectives,
-  PresetImport,
-  TransformOptions
-} from './types'
+import type { Options, PresetDirectives, PresetImport } from './types'
 
 export const libraryName = 'element-plus'
 
-export const allComponents = (AllComponents as unknown as Component[])
+const allComponents = (AllComponents as unknown as Component[])
   .map(item => item.name!)
 
 export const allImportsWithStyle: string[] = [
@@ -20,25 +15,35 @@ export const allImportsWithStyle: string[] = [
   'ElNotification'
 ]
 
-export const allImports: PresetImport[] = allImportsWithStyle
+const allImports: PresetImport[] = allImportsWithStyle
 
-export const allNoStylesComponents: PresetComponent[] = [
+const allNoStylesComponents: string[] = [
   'ElAutoResizer',
   'ElTooltipV2'
 ]
 
-export const allDirectives: PresetDirectives = {
+const allDirectives: PresetDirectives = {
   Loading: ['ElLoadingDirective', 'ElLoading'],
   Popover: ['ElPopoverDirective', 'ElPopover'],
   InfiniteScroll: 'ElInfiniteScroll'
 }
 
-export const defaultInjectionID: ElIdInjectionContext = {
+const defaultInjectionID: ElIdInjectionContext = {
   prefix: 1024,
   current: 0
 }
 
-export const transform: TransformOptions = {
-  include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.((c|m)?j|t)sx?$/],
-  exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]
+const defaultInclude = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.((c|m)?j|t)sx?$/]
+
+const defaultExclude = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]
+
+export const defaults: Options = {
+  components: allComponents,
+  directives: allDirectives,
+  imports: allImports,
+  importStyle: 'css',
+  noStylesComponents: allNoStylesComponents,
+  injectionID: defaultInjectionID,
+  include: defaultInclude,
+  exclude: defaultExclude
 }

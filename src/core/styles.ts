@@ -1,9 +1,4 @@
-import {
-  allComponents,
-  allImportsWithStyle,
-  allNoStylesComponents,
-  libraryName
-} from '../config'
+import { allImportsWithStyle, libraryName } from '../config'
 import { hyphenate } from '../utils'
 import type { Options } from '../types'
 
@@ -16,18 +11,12 @@ export function getStyleDir (config: Options, name: string) {
 
 export function resolveStyles (config: Options, name: string) {
   const components = new Set([
-    ...allComponents,
+    ...config.components,
     ...allImportsWithStyle
   ])
-  const noStylesComponents = new Set([
-    ...allNoStylesComponents,
-    ...config.noStylesComponents || []
-  ])
+  const noStylesComponents = new Set(config.noStylesComponents)
 
-  if (
-    !components.has(name) ||
-    noStylesComponents.has(name)
-  ) {
+  if (!components.has(name) || noStylesComponents.has(name)) {
     return undefined
   }
 
