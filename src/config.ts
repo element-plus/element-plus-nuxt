@@ -45,5 +45,7 @@ export const defaults: Options = {
   noStylesComponents: allNoStylesComponents,
   injectionID: defaultInjectionID,
   include: defaultInclude,
-  exclude: defaultExclude
+  exclude: defaultExclude,
+  namespace: 'el',
+  appendTo: []
 }

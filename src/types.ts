@@ -88,6 +88,22 @@ export interface Options extends TransformOptions {
    * ```
    */
   injectionID: ElIdInjectionContext
+  /**
+   * Global component className prefix.
+   *
+   * When you modify the global namespace, you need to modify it here at the same time.
+   *
+   * @default 'el'
+   */
+  namespace: string
+  /**
+   * which element the tooltip CONTENT appends to.
+   *
+   * When you modify the `append-to` props in all based on Tooltip components, you need to add the relevant values here, so as to avoid hydrate errors.
+   *
+   * @default '#el-popper-container-[random number]'
+   */
+  appendTo: string[]
 }
 
 declare module '@nuxt/schema' {
