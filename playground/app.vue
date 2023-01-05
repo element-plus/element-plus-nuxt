@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ID_INJECTION_KEY } from 'element-plus'
+import { $message } from './utils'
 
 provide(ID_INJECTION_KEY, {
   prefix: 1024,
@@ -25,7 +26,7 @@ onMounted(() => {
 })
 
 function hello () {
-  ElMessage.info('hello world')
+  $message('hello world')
 }
 </script>
 

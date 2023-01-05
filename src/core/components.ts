@@ -1,9 +1,9 @@
 import { addComponent } from '@nuxt/kit'
 import { allComponents, libraryName } from '../config'
 import { toArray } from '../utils'
-import type { ElementPlusModuleOptions } from '../types'
+import type { Options } from '../types'
 
-export function resolveComponents (config: ElementPlusModuleOptions) {
+export function resolveComponents (config: Options) {
   const components = new Set([
     ...allComponents,
     ...config.components || []
