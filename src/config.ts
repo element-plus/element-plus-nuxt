@@ -1,5 +1,6 @@
 import AllComponents from 'element-plus/es/component'
 import type { Component } from 'vue'
+import type { ElIdInjectionContext } from 'element-plus'
 import type {
   PresetComponent,
   PresetDirectives,
@@ -30,6 +31,11 @@ export const allDirectives: PresetDirectives = {
   Loading: ['ElLoadingDirective', 'ElLoading'],
   Popover: ['ElPopoverDirective', 'ElPopover'],
   InfiniteScroll: 'ElInfiniteScroll'
+}
+
+export const defaultInjectionID: ElIdInjectionContext = {
+  prefix: 1024,
+  current: 0
 }
 
 export const transform: TransformOptions = {

@@ -1,8 +1,9 @@
-import { defineNuxtModule } from '@nuxt/kit'
+import { addPluginTemplate, defineNuxtModule } from '@nuxt/kit'
 import {
   resolveComponents,
   resolveDirectives,
   resolveImports,
+  resolveInjection,
   resolveOptions,
   resolveStyles,
   transformPlugin
@@ -18,6 +19,7 @@ export default defineNuxtModule<Options>({
     const config = options || nuxt.options.elementPlus
 
     resolveOptions()
+    addPluginTemplate(resolveInjection(config))
     nuxt.options.imports.autoImport !== false && resolveImports(config)
     nuxt.options.components !== false && resolveComponents(config)
 
