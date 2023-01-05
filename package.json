@@ -15,6 +15,7 @@
   "files": [
     "dist"
   ],
+  "packageManager": "pnpm@7.13.2",
   "keywords": [
     "element-plus",
     "nuxt"
@@ -33,6 +34,8 @@
     "dev:build": "nuxi build playground",
     "dev:start": "node playground/.output/server/index.mjs",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "lint": "eslint . --fix --ext .ts,.vue,.js",
+    "lint:test": "eslint . --ext .ts,.vue,.js --max-warnings 0",
     "postinstall": "npm run dev:prepare"
   },
   "dependencies": {
