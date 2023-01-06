@@ -56,6 +56,7 @@ export const defaults: Options = {
   directives: allDirectives,
   imports: allImports,
   importStyle: 'css',
+  themes: [],
   noStylesComponents: allNoStylesComponents,
   injectionID: defaultInjectionID,
   include: defaultInclude,

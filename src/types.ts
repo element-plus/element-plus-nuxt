@@ -1,9 +1,9 @@
 import type { ElIdInjectionContext } from 'element-plus'
 
-// name: export name from library, as: name you want to use in your project, from: name of library
+/** name: export name from library, as: name you want to use in your project, from: name of library */
 export type PresetImport = string | [name: string, as?: string, from?: string]
 
-// directive: export name from library, name: export name with style
+/** directive: export name from library, name: export name with style */
 export type PresetDirectives = Record<string, string | [directive: string, name?: string]>
 
 /** Used to filter files that need to automatically import styles and other functions */
@@ -67,11 +67,22 @@ export interface Options extends TransformOptions {
    */
   imports: PresetImport[]
   /**
-   * import style css or sass with components
+   * import style css or sass(scss) with components
    *
    * @default 'css'
    */
-  importStyle: 'css' | 'sass'
+  importStyle: 'css' | 'scss'
+  /**
+   * Themes that need to be automatically imported from Element Plus.
+   *
+   * Currently, only [dark](https://element-plus.org/en-US/guide/dark-mode.html) are supported .
+   *
+   * @example
+   * ```ts
+   *  ['dark']
+   * ```
+   */
+  themes: Array<'dark'>
   /**
    * a list of component names that have no styles, so resolving their styles file should be prevented
    *
