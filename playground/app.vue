@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// TODO: Automatically import icon from @element-plus/icons-vue
-import { ArrowDown } from '@element-plus/icons-vue'
 import { $message } from './utils'
 
 const { t } = useLocale()
@@ -62,7 +60,7 @@ function hello () {
         <el-button type="primary">
           Dropdown List
           <el-icon class="el-icon--right">
-            <arrow-down />
+            <el-icon-arrow-down />
           </el-icon>
         </el-button>
         <template #dropdown>
@@ -88,7 +86,7 @@ function hello () {
         </template>
         <div>test1</div>
       </el-popover>
-      <el-button type="success" @click="hello">
+      <el-button :icon="ElIconEditPen" type="success" @click="hello">
         {{ t('el.colorpicker.confirm') }}
       </el-button>
       <ElButton @click="dialogVisible = true">

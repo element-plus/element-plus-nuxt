@@ -38,6 +38,10 @@
     "lint:test": "eslint . --ext .ts,.vue,.js --max-warnings 0",
     "postinstall": "npm run dev:prepare"
   },
+  "peerDependencies": {
+    "@element-plus/icons-vue": ">=0.2.6",
+    "element-plus": ">=2"
+  },
   "dependencies": {
     "@nuxt/kit": "^3.0.0",
     "magic-string": "^0.27.0",

@@ -1,4 +1,4 @@
-import { libraryName } from './config'
+import { allIcons, iconLibraryName, libraryName } from './config'
 import type { PresetImport } from './types'
 
 export function isArray (value: any): value is any[] {
@@ -15,7 +15,7 @@ export function toRegExp (arr: string[], flags?: string): RegExp {
   return new RegExp(`(${arr.join('|')})`, flags)
 }
 
-export function genLibImports (list: PresetImport[]): string {
+export function genLibraryImport (list: PresetImport[]): string {
   const values = list.map((item) => {
     if (isArray(item)) {
       const [name, as] = item
@@ -30,6 +30,12 @@ export function genLibImports (list: PresetImport[]): string {
 
 export function genSideEffectsImport (value: string): string {
   return `import '${value}';`
+}
+
+export function genIconPresets (prefix: string): PresetImport[] {
+  return allIcons.map((name) => {
+    return [name, `${prefix}${name}`, iconLibraryName] as PresetImport
+  })
 }
 
 export function camelize (value: string): string {
