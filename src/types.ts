@@ -1,8 +1,10 @@
 import type { ElIdInjectionContext } from 'element-plus'
 
+// name: export name from library, as: name you want to use in your project, from: name of library
 export type PresetImport = string | [name: string, as?: string, from?: string]
 
-export type PresetDirectives = Record<string, string | [directive: string, name?: string]> // directive: export name from Element Plus, name: export name with style
+// directive: export name from library, name: export name with style
+export type PresetDirectives = Record<string, string | [directive: string, name?: string]>
 
 /** Used to filter files that need to automatically import styles and other functions */
 export interface TransformOptions {
@@ -97,13 +99,23 @@ export interface Options extends TransformOptions {
    */
   namespace: string
   /**
-   * which element the tooltip CONTENT appends to.
+   * Which element the tooltip CONTENT appends to.
    *
    * When you modify the `append-to` props in all based on Tooltip components, you need to add the relevant values here, so as to avoid hydrate errors.
    *
-   * @default '#el-popper-container-[random number]'
+   * If you used `Teleport` to teleport a part of a component's template into a DOM node that near the `<body>` tag, you can also add this ID here. The internal plug-in will automatically handle hydrate errors.
    */
   appendTo: string[]
+  /**
+   * Prefix name of the icon.
+   *
+   * To avoid the duplication of icon names with native DOM or other components, we recommend adding a prefix to the icon.
+   *
+   * @default 'ElIcon'
+   *
+   * Disable automatic imports of icons by configuring `false`.
+   */
+  icon: false | string
 }
 
 declare module '@nuxt/schema' {

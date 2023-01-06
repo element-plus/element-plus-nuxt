@@ -3,7 +3,7 @@ import MagicString from 'magic-string'
 import { allImportsWithStyle } from '../config'
 import {
   camelize,
-  genLibImports,
+  genLibraryImport,
   genSideEffectsImport,
   toArray,
   toRegExp
@@ -75,7 +75,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       })
 
       if (directives.length) {
-        imports.add(genLibImports(directives))
+        imports.add(genLibraryImport(directives))
       }
 
       if (imports.size) {
