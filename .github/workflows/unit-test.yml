@@ -30,11 +30,11 @@ jobs:
       - name: Install
         run: pnpm i
 
-      - name: Lint
-        run: pnpm lint:test
-
       - name: Build
         run: pnpm build
+
+      - name: Lint
+        run: pnpm lint:test
 
       - name: Build playground
         run: pnpm dev:build
