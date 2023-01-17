@@ -49,7 +49,21 @@ onMounted(() => {
 })
 
 function hello () {
-  $message('hello world')
+  ElMessageBox.confirm(
+    'proxy will permanently delete the file. Continue?',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning'
+    }
+  )
+    .then(() => {
+      $message('Delete completed')
+    })
+    .catch(() => {
+      $message('Delete canceled')
+    })
 }
 </script>
 
