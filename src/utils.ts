@@ -12,7 +12,7 @@ export function toArray<T extends any | any[]> (
 }
 
 export function toRegExp (arr: string[], flags?: string): RegExp {
-  return new RegExp(`(${arr.join('|')})`, flags)
+  return new RegExp(`\\b(${arr.join('|')})\\b`, flags)
 }
 
 export function genLibraryImport (list: PresetImport[]): string {
