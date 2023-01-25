@@ -22,9 +22,6 @@ export default defineNuxtModule<Partial<Options>>({
   setup (_options, nuxt) {
     const options = _options as Options
 
-    nuxt.options.build.transpile = nuxt.options.build.transpile || []
-    nuxt.options.build.transpile.push("element-plus")
-
     resolveOptions()
     resolveThemes(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
