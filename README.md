@@ -79,6 +79,12 @@ If there are components that are not imported automatically from Element Plus, y
 
 e.g. `['ElSubMenu']`
 
+### subComponents
+
+- Type: `object`
+
+A map of components that the definition file of subComponent is in its parent component.
+
 ### directives
 
 - Type: `object`

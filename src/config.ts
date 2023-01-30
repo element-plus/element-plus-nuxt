@@ -33,6 +33,27 @@ const allDirectives: PresetDirectives = {
   InfiniteScroll: 'ElInfiniteScroll'
 }
 
+const allSubComponents: Record<string, string[]> = {
+  ElBreadcrumb: ['ElBreadcrumbItem'],
+  ElButton: ['ElButtonGroup'],
+  ElCarousel: ['ElCarouselItem'],
+  ElCheckbox: ['ElCheckboxButton', 'ElCheckboxGroup'],
+  ElCollapse: ['ElCollapseItem'],
+  ElContainer: ['ElAside', 'ElFooter', 'ElHeader', 'ElMain'],
+  ElDescriptions: ['ElDescriptionsItem'],
+  ElDropdown: ['ElDropdownItem', 'ElDropdownMenu'],
+  ElForm: ['ElFormItem'],
+  ElMenu: ['ElMenuItem', 'ElMenuItemGroup', 'ElSubMenu'],
+  ElRadio: ['ElRadioGroup', 'ElRadioButton'],
+  ElSkeleton: ['ElSkeletonItem'],
+  ElSelect: ['ElOption', 'ElOptionGroup'],
+  ElSteps: ['ElStep'],
+  ElTable: ['ElTableColumn'],
+  ElTableV2: ['ElAutoResizer'],
+  ElTabs: ['ElTabPane'],
+  ElTimeline: ['ElTimelineItem']
+}
+
 const defaultInjectionID: ElIdInjectionContext = {
   prefix: 1024,
   current: 0
@@ -53,6 +74,7 @@ const defaultExclude: RegExp[] = [
 
 export const defaults: Options = {
   components: allComponents,
+  subComponents: allSubComponents,
   directives: allDirectives,
   imports: allImports,
   importStyle: 'css',
