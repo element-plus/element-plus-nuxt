@@ -103,12 +103,15 @@ function hello () {
       <el-button :icon="ElIconEditPen" type="success" @click="hello">
         {{ t('el.colorpicker.confirm') }}
       </el-button>
-      <ElButton @click="dialogVisible = true">
+      <ElButton @click="hello">
         Open Dialog
       </ElButton>
       <el-button type="primary" @click="drawer = true">
         Open Drawer
       </el-button>
+      <LazyElButton type="warning" @click="$message('come from Lazy Button')">
+        Lazy Button
+      </LazyElButton>
     </section>
     <section class="mb-5">
       <el-table v-loading="loading" :data="tableData" style="width: 100%">

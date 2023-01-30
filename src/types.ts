@@ -27,6 +27,10 @@ export interface Options extends TransformOptions {
    */
   components: PresetImport[]
   /**
+   * A map of components that the definition file of subComponent is in its parent component.
+   */
+  subComponents: Record<string, string[]>
+  /**
    * A list of directives that need to be automatically imported externally.
    *
    * @default
