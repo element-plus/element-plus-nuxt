@@ -1,6 +1,6 @@
 {
   "name": "@element-plus/nuxt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Element Plus module for Nuxt",
   "license": "MIT",
   "type": "module",
