@@ -1,21 +1,18 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
-import { allImportsWithStyle } from '../config'
+import { allImportsWithStyle, libraryName } from '../config'
 import {
   camelize,
   genLibraryImport,
   genSideEffectsImport,
-  toArray,
   toRegExp
 } from '../utils'
 import type { PresetImport, TransformOptions } from '../types'
 
-type Style = string | string[]
-
 interface PluginOptions extends TransformOptions {
   sourcemap?: boolean
-  transformStyles?: (name: string) => undefined | Style
-  transformDirectives?: (name: string) => undefined | [name: string, styles?: Style]
+  transformStyles: (name: string) => undefined | string
+  transformDirectives: (name: string) => undefined | [name: string, styles?: string]
 }
 
 const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
@@ -26,7 +23,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
   const { include, exclude, transformStyles, transformDirectives } = options
 
   return {
-    name: 'element-plus:transform',
+    name: `${libraryName}:transform`,
     enforce: 'post',
     transformInclude (id) {
       if (exclude.some(pattern => id.match(pattern))) {
@@ -42,23 +39,21 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       const s = new MagicString(code)
       let no = 0
 
-      const addStyles = (styles?: Style) => {
-        styles && toArray(styles).forEach((item) => {
-          imports.add(genSideEffectsImport(item))
-        })
+      const addStyles = (styles?: string) => {
+        styles && imports.add(genSideEffectsImport(styles))
       }
 
-      transformStyles && s.replace(componentsRegExp, (full, lazy, name) => {
+      s.replace(componentsRegExp, (full, lazy, name) => {
         addStyles(transformStyles(camelize(name)))
         return full
       })
 
-      transformStyles && s.replace(importsRegExp, (full, name) => {
+      s.replace(importsRegExp, (full, name) => {
         addStyles(transformStyles(camelize(name)))
         return full
       })
 
-      transformDirectives && s.replace(directivesRegExp, (full, name) => {
+      s.replace(directivesRegExp, (full, name) => {
         const directiveConfig = transformDirectives(camelize(name))
 
         if (directiveConfig) {

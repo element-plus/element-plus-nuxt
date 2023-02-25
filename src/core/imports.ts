@@ -6,8 +6,7 @@ import type { Options } from '../types'
 export function resolveImports (config: Options) {
   const { imports, icon } = config
   const icons = icon !== false ? genIconPresets(icon) : []
-  const _imports = [...imports, ...icons]
-  const allImports = new Set(_imports)
+  const allImports = new Set([...imports, ...icons])
 
   addImportsSources({
     from: libraryName,

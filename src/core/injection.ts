@@ -1,3 +1,4 @@
+import { libraryName } from '../config'
 import type { Options } from '../types'
 
 /** Inject some additional configuration into Vue at runtime */
@@ -5,7 +6,7 @@ export function resolveInjection (config: Options) {
   const { injectionID } = config
 
   return {
-    filename: 'element-plus-injection.plugin.mjs',
+    filename: `${libraryName}-injection.plugin.mjs`,
     getContents: () => {
       return `import { defineNuxtPlugin } from '#app';
 import { ID_INJECTION_KEY } from 'element-plus';

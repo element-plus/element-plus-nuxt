@@ -6,8 +6,7 @@ import type { Options } from '../types'
 export function resolveComponents (config: Options) {
   const { components, subComponents, icon } = config
   const icons = icon !== false ? genIconPresets(icon) : []
-  const _components = [...components, ...icons]
-  const allComponents = new Set(_components)
+  const allComponents = new Set([...components, ...icons])
   const subComponentsMap = Object.fromEntries<string>(
     Object.entries(subComponents).reduce((all, [key, values]) => {
       values.forEach((item) => {

@@ -1,5 +1,5 @@
 import { addPluginTemplate, defineNuxtModule } from '@nuxt/kit'
-import { defaults } from './config'
+import { defaults, libraryName } from './config'
 import {
   resolveComponents,
   resolveDirectives,
@@ -15,7 +15,7 @@ import type { Options } from './types'
 
 export default defineNuxtModule<Partial<Options>>({
   meta: {
-    name: 'element-plus',
+    name: libraryName,
     configKey: 'elementPlus'
   },
   defaults,
