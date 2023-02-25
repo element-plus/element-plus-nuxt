@@ -5,7 +5,7 @@
   <a href="https://www.npmjs.com/package/@element-plus/nuxt">
     <img src="https://img.shields.io/npm/v/@element-plus/nuxt.svg">
   </a>
-  <a href="https://npmcharts.com/compare/element-plus?minimal=true">
+  <a href="https://npmcharts.com/compare/@element-plus/nuxt?minimal=true">
     <img src="https://img.shields.io/npm/dm/@element-plus/nuxt.svg">
   </a>
 </p>
