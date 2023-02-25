@@ -1,3 +1,4 @@
+import { libraryName } from '../config'
 import type { Options } from '../types'
 
 export function resolveTeleports (config: Options) {
@@ -5,7 +6,7 @@ export function resolveTeleports (config: Options) {
   const defaultId = `#${namespace}-popper-container-`
 
   return {
-    filename: 'element-plus-teleports.plugin.mjs',
+    filename: `${libraryName}-teleports.plugin.mjs`,
     getContents: () => {
       return `import { defineNuxtPlugin } from '#app'
 
