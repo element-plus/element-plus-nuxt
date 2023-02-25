@@ -1,3 +1,15 @@
+<p align="center">
+  <img width="300px" src="https://user-images.githubusercontent.com/10731096/95823103-9ce15780-0d5f-11eb-8010-1bd1b5910d4f.png">
+</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/@element-plus/nuxt">
+    <img src="https://img.shields.io/npm/v/@element-plus/nuxt.svg">
+  </a>
+  <a href="https://npmcharts.com/compare/element-plus?minimal=true">
+    <img src="https://img.shields.io/npm/dm/@element-plus/nuxt.svg">
+  </a>
+</p>
+
 # Element Plus Nuxt
 
 > [Element Plus](https://element-plus.org) module for [Nuxt](https://nuxt.com)
@@ -17,8 +29,6 @@
 npm i @element-plus/nuxt -D
 ```
 
-## Usage
-
 ```ts
 export default defineNuxtConfig({
   modules: [
@@ -27,6 +37,18 @@ export default defineNuxtConfig({
   elementPlus: { /** Options */ }
 })
 ```
+
+## Usage
+
+```vue
+<template>
+  <el-button @click="ElMessage('hello')">button</el-button>
+  <ElButton type="success">button</ElButton>
+  <LazyElButton type="warning">lazy button</LazyElButton>
+</template>
+```
+
+Reference [Nuxt documentation](https://nuxt.com/docs/guide/directory-structure/components) and [playground](./playground/app.vue) use.
 
 ## Options
 
@@ -62,6 +84,7 @@ When you change the global namespace, you must change it here as well.
 ### injectionID
 
 - Type: `object`
+- Default: `{ prefix: 1024, current: 0 }`
 
 Automatically inject the ID_INJECTION_KEY into Vue.
 
@@ -106,12 +129,14 @@ When a component incorrectly loads styles, you need to add the component name he
 ### include
 
 - Type: `array`
+- Default: `[ /\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.((c|m)?j|t)sx?$/]`
 
 Include files that need to automatically import styles.
 
 ### exclude
 
 - Type: `array`
+- Default: `[/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]`
 
 Exclude files that do not require the automatic import of styles.
 
