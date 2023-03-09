@@ -25,7 +25,7 @@ function renderTeleports (teleports) {
     }
     return all
   }, teleports.body || '')
-  return { body }
+  return { ...teleports, body }
 }
 `
     }
