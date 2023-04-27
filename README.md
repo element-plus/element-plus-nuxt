@@ -26,7 +26,7 @@
 ## Installation
 
 ```bash
-npm i @element-plus/nuxt -D
+npm i element-plus @element-plus/nuxt -D
 ```
 
 ```ts
@@ -43,7 +43,7 @@ export default defineNuxtConfig({
 ```vue
 <template>
   <el-button @click="ElMessage('hello')">button</el-button>
-  <ElButton type="success">button</ElButton>
+  <ElButton :icon="ElIconEditPen" type="success">button</ElButton>
   <LazyElButton type="warning">lazy button</LazyElButton>
 </template>
 ```
