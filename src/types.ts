@@ -74,8 +74,10 @@ export interface Options extends TransformOptions {
    * import style css or sass(scss) with components
    *
    * @default 'css'
+   *
+   * Disable automatically import styles with `false`
    */
-  importStyle: 'css' | 'scss'
+  importStyle: 'css' | 'scss' | boolean
   /**
    * A list of themes that require importing styles automatically.
    *

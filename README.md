@@ -54,10 +54,10 @@ Reference [Nuxt documentation](https://nuxt.com/docs/guide/directory-structure/c
 
 ### importStyle
 
-- Type: `'css' | 'scss'`
+- Type: `'css' | 'scss' | boolean`
 - Default: `css`
 
-import style css or sass(scss) with components.
+import style css or sass(scss) with components, disable automatically import styles with `false`.
 
 ### themes
 
