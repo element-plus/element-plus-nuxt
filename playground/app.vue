@@ -146,8 +146,8 @@ function hello () {
           <el-menu-item index="2-3">
             item three
           </el-menu-item>
-          <!-- When the menu has multiple pop-up windows, need `popper-append-to-body` flag -->
-          <el-sub-menu index="2-4" popper-append-to-body>
+          <!-- When the menu has multiple pop-up windows, need `teleported` flag -->
+          <el-sub-menu index="2-4" teleported>
             <template #title>
               item four
             </template>
