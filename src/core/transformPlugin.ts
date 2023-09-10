@@ -10,7 +10,7 @@ import {
 import type { PresetImport, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
-  sourcemap?: boolean
+  sourcemap?: boolean | 'hidden'
   transformStyles: (name: string) => undefined | string
   transformDirectives: (name: string) => undefined | [name: string, styles?: string]
 }
