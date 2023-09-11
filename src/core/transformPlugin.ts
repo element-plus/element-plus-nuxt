@@ -1,5 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
+import type { NuxtOptions } from '@nuxt/schema'
 import { allImportsWithStyle, libraryName } from '../config'
 import {
   camelize,
@@ -7,7 +8,6 @@ import {
   genSideEffectsImport,
   toRegExp
 } from '../utils'
-import type { NuxtOptions } from '@nuxt/schema'
 import type { PresetImport, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
