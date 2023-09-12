@@ -1,5 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
+import type { NuxtOptions } from '@nuxt/schema'
 import { allImportsWithStyle, libraryName } from '../config'
 import {
   camelize,
@@ -10,7 +11,7 @@ import {
 import type { PresetImport, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
-  sourcemap?: boolean
+  sourcemap?: NuxtOptions['sourcemap']['client']
   transformStyles: (name: string) => undefined | string
   transformDirectives: (name: string) => undefined | [name: string, styles?: string]
 }
