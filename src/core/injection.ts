@@ -8,7 +8,7 @@ export function resolveInjection (config: Options) {
   return {
     filename: `${libraryName}-injection.plugin.mjs`,
     getContents: () => {
-      return `import { defineNuxtPlugin } from '#app';
+      return `import { defineNuxtPlugin } from '#imports';
 import { ID_INJECTION_KEY } from 'element-plus';
 
 export default defineNuxtPlugin(nuxtApp => {
