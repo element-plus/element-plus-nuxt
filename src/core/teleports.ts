@@ -8,7 +8,7 @@ export function resolveTeleports (config: Options) {
   return {
     filename: `${libraryName}-teleports.plugin.mjs`,
     getContents: () => {
-      return `import { defineNuxtPlugin } from '#app'
+      return `import { defineNuxtPlugin } from '#imports'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:rendered', (ctx) => {
