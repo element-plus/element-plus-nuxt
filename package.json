@@ -41,21 +41,21 @@
     "element-plus": ">=2"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.7.1",
+    "@nuxt/kit": "^3.11.1",
     "magic-string": "^0.27.0",
-    "unplugin": "^1.0.1"
+    "unplugin": "^1.10.0"
   },
   "devDependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
-    "@nuxt/module-builder": "^0.5.1",
-    "@nuxt/schema": "^3.7.1",
-    "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@types/node": "^18.11.18",
-    "element-plus": "^2.3.12",
-    "eslint": "^8.29.0",
-    "nuxi": "^3.8.3",
-    "nuxt": "^3.7.1",
-    "typescript": "^5.2.2",
-    "vue": "^3.3.4"
+    "@element-plus/icons-vue": "^2.3.1",
+    "@nuxt/module-builder": "^0.5.5",
+    "@nuxt/schema": "^3.11.1",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@types/node": "^18.19.26",
+    "element-plus": "^2.6.1",
+    "eslint": "^8.57.0",
+    "nuxi": "^3.11.0",
+    "nuxt": "^3.11.1",
+    "typescript": "^5.4.2",
+    "vue": "^3.4.21"
   }
 }
