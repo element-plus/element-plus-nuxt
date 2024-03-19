@@ -34,6 +34,7 @@ const allDirectives: PresetDirectives = {
 }
 
 const allSubComponents: Record<string, string[]> = {
+  ElAnchor: ['ElAnchorLink'],
   ElBreadcrumb: ['ElBreadcrumbItem'],
   ElButton: ['ElButtonGroup'],
   ElCarousel: ['ElCarouselItem'],
@@ -51,7 +52,8 @@ const allSubComponents: Record<string, string[]> = {
   ElTable: ['ElTableColumn'],
   ElTableV2: ['ElAutoResizer'],
   ElTabs: ['ElTabPane'],
-  ElTimeline: ['ElTimelineItem']
+  ElTimeline: ['ElTimelineItem'],
+  ElTour: ['ElTourStep']
 }
 
 const defaultInjectionID: ElIdInjectionContext = {
