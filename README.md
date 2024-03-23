@@ -88,6 +88,13 @@ When you change the global namespace, you must change it here as well.
 
 Automatically inject the ID_INJECTION_KEY into Vue.
 
+### injectionZIndex
+
+- Type: `object`
+- Default: `{ current: 0 }`
+
+Automatically inject the Z_INDEX_INJECTION_KEY into Vue.
+
 ### appendTo
 
 - Type: `array`

@@ -1,4 +1,4 @@
-import type { ElIdInjectionContext } from 'element-plus'
+import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
 
 /** name: export name from the library, as: the name you want to use in your project, from: the name of library */
 export type PresetImport = string | [name: string, as?: string, from?: string]
@@ -107,6 +107,15 @@ export interface Options extends TransformOptions {
    * ```
    */
   injectionID: ElIdInjectionContext
+  /**
+   * We need to inject an initial z-index value to ensure that the server side and client side generate the same z-index value, so as to avoid hydration errors.
+   *
+   * @default
+   * ```ts
+   * { current: 0 }
+   * ```
+   */
+  injectionZIndex: ElZIndexInjectionContext
   /**
    * Global component className prefix.
    *
