@@ -51,11 +51,11 @@
     "@nuxt/schema": "^3.11.1",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@types/node": "^18.19.26",
-    "element-plus": "^2.6.1",
+    "element-plus": "^2.6.2",
     "eslint": "^8.57.0",
-    "nuxi": "^3.11.0",
+    "nuxi": "^3.11.1",
     "nuxt": "^3.11.1",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.3",
     "vue": "^3.4.21"
   }
 }

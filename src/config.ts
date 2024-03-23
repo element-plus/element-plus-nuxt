@@ -1,7 +1,7 @@
 import AllComponents from 'element-plus/es/component'
 import * as AllIcons from '@element-plus/icons-vue'
 import type { Component } from 'vue'
-import type { ElIdInjectionContext } from 'element-plus'
+import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
 import type { Options, PresetDirectives, PresetImport } from './types'
 
 export const libraryName = 'element-plus'
@@ -61,6 +61,10 @@ const defaultInjectionID: ElIdInjectionContext = {
   current: 0
 }
 
+const defaultInjectionZIndex: ElZIndexInjectionContext = {
+  current: 0
+}
+
 const defaultInclude: RegExp[] = [
   /\.vue$/,
   /\.vue\?vue/,
@@ -83,6 +87,7 @@ export const defaults: Options = {
   themes: [],
   noStylesComponents: allNoStylesComponents,
   injectionID: defaultInjectionID,
+  injectionZIndex: defaultInjectionZIndex,
   include: defaultInclude,
   exclude: defaultExclude,
   namespace: 'el',
