@@ -26,7 +26,7 @@
 ## Installation
 
 ```bash
-npm i element-plus @element-plus/nuxt -D
+npx nuxi@latest module add element-plus
 ```
 
 ```ts
