@@ -20,12 +20,14 @@
 - Automatically import directives and styles on demand.
 - Automatically import icons from [@element-plus/icons-vue](https://github.com/element-plus/element-plus-icons).
 - Automatically import of ElMessage, ElNotification and other methods.
-- Automatically inject the ID_INJECTION_KEY into Vue.
+- Automatically inject the ID_INJECTION_KEY and ZINDEX_INJECTION_KEY into Vue.
 - Automatically inject the teleport markup into the correct location in the final page HTML.
 
 ## Installation
 
 ```bash
+npx nuxi@latest module add element-plus
+# or
 npm i element-plus @element-plus/nuxt -D
 ```
 
