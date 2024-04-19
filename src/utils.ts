@@ -5,6 +5,10 @@ export function isArray (value: any): value is any[] {
   return Array.isArray(value)
 }
 
+export function isVueComponent (value: any): boolean {
+  return typeof value === 'object' && (value.name || value.props || value.emits || value.setup || value.render)
+}
+
 export function toArray<T extends any | any[]> (
   value: T
 ): T extends any[] ? T : T[] {
