@@ -5,7 +5,7 @@ export function isArray (value: any): value is any[] {
   return Array.isArray(value)
 }
 
-export function isVueComponent (value: any): boolean {
+export function isVueComponent (value: any): value is Component {
   return typeof value === 'object' && (value.name || value.props || value.emits || value.setup || value.render)
 }
 
