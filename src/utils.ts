@@ -1,3 +1,4 @@
+import type { Component } from 'vue'
 import { allIcons, iconLibraryName, libraryName } from './config'
 import type { PresetImport } from './types'
 

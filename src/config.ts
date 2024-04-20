@@ -1,6 +1,7 @@
 import * as AllComponents from 'element-plus'
 import * as AllIcons from '@element-plus/icons-vue'
 import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
+import type { Component } from 'vue'
 import { isVueComponent } from './utils'
 import type { Options, PresetDirectives, PresetImport } from './types'
 
