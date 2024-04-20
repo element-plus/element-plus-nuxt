@@ -7,7 +7,7 @@ export function isArray (value: any): value is any[] {
 }
 
 export function isVueComponent (value: any): value is Component {
-  return typeof value === 'object' && (value.name || value.props || value.emits || value.setup || value.render)
+  return typeof value === 'object' && value.name && (value.props || value.emits || value.setup || value.render)
 }
 
 export function toArray<T extends any | any[]> (
