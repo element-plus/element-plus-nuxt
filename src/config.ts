@@ -1,7 +1,7 @@
 import * as AllComponents from 'element-plus'
 import * as AllIcons from '@element-plus/icons-vue'
-import type { Component } from 'vue'
 import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
+import type { Component } from 'vue'
 import { isVueComponent } from './utils'
 import type { Options, PresetDirectives, PresetImport } from './types'
 
@@ -9,12 +9,12 @@ export const libraryName = 'element-plus'
 
 export const iconLibraryName = '@element-plus/icons-vue'
 
-const allComponents = Object.values(AllComponents).reduce((all, item) => {
-  if (isVueComponent(item) && /^El[A-Z]\w+/.test(item.name)) {
-    all.push(item.name)
+const allComponents = Object.values(AllComponents).reduce<string[]>((all, item) => {
+  if (isVueComponent(item) && /^El[A-Z]\w+/.test((item as Component).name ?? '')) {
+    all.push((item as Component).name!)
   }
   return all
-}, [])
+}, [] as string[])
 
 export const allIcons = Object.keys(AllIcons)
 
