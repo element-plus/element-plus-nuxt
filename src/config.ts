@@ -9,12 +9,13 @@ export const libraryName = 'element-plus'
 
 export const iconLibraryName = '@element-plus/icons-vue'
 
-const allComponents = Object.values(AllComponents).reduce<string[]>((all, item) => {
-  if (isVueComponent(item) && /^El[A-Z]\w+/.test((item as Component).name ?? '')) {
-    all.push((item as Component).name!)
+const allComponents = Object.entries(AllComponents).reduce<string[]>((all, [key, item]) => {
+  const regExp = /^El[A-Z]\w+/
+  if (isVueComponent(item) && regExp.test(key) && regExp.test((item as Component).name ?? '')) {
+    all.push(key)
   }
   return all
-}, [] as string[])
+}, [])
 
 export const allIcons = Object.keys(AllIcons)
 
@@ -29,6 +30,8 @@ const allImports: PresetImport[] = allImportsWithStyle
 
 const allNoStylesComponents: string[] = [
   'ElAutoResizer',
+  'ElCollection',
+  'ElCollectionItem',
   'ElTooltipV2'
 ]
 
@@ -45,11 +48,13 @@ const allSubComponents: Record<string, string[]> = {
   ElCarousel: ['ElCarouselItem'],
   ElCheckbox: ['ElCheckboxButton', 'ElCheckboxGroup'],
   ElCollapse: ['ElCollapseItem'],
+  ElCollection: ['ElCollectionItem'],
   ElContainer: ['ElAside', 'ElFooter', 'ElHeader', 'ElMain'],
   ElDescriptions: ['ElDescriptionsItem'],
   ElDropdown: ['ElDropdownItem', 'ElDropdownMenu'],
   ElForm: ['ElFormItem'],
   ElMenu: ['ElMenuItem', 'ElMenuItemGroup', 'ElSubMenu'],
+  ElPopper: ['ElPopperArrow', 'ElPopperContent', 'ElPopperTrigger'],
   ElRadio: ['ElRadioGroup', 'ElRadioButton'],
   ElSkeleton: ['ElSkeletonItem'],
   ElSelect: ['ElOption', 'ElOptionGroup'],
