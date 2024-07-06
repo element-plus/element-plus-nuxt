@@ -30,11 +30,11 @@ export function genLibraryImport (list: PresetImport[]): string {
     return item
   })
 
-  return `import {${values.join(',')}} from '${libraryName}';`
+  return `import {${values.join(',')}} from '${libraryName}';\n`
 }
 
 export function genSideEffectsImport (value: string): string {
-  return `import '${value}';`
+  return `import '${value}';\n`
 }
 
 export function genIconPresets (prefix: string): PresetImport[] {
