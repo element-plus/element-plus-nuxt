@@ -9,7 +9,7 @@ export function getStyleDir (config: Options, name: string) {
   const dir = hyphenate(name.slice(2))
   const type = config.importStyle === 'scss' ? 'index' : 'css'
 
-  return `${libraryName}/es/components/${dir}/style/${type}`
+  return `${libraryName}/es/components/${dir}/style/${type}.mjs`
 }
 
 export function resolveStyles (config: Options, name: string) {

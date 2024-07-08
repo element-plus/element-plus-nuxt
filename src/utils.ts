@@ -1,6 +1,12 @@
 import type { Component } from 'vue'
-import { allIcons, iconLibraryName, libraryName } from './config'
+import { createResolver } from '@nuxt/kit'
+import { allIcons } from './config'
 import type { PresetImport } from './types'
+
+export function resolvePath (path: string): Promise<string> {
+  const { resolvePath } = createResolver(import.meta.url)
+  return resolvePath(path)
+}
 
 export function isArray (value: any): value is any[] {
   return Array.isArray(value)
@@ -20,7 +26,7 @@ export function toRegExp (arr: string[], flags?: string): RegExp {
   return new RegExp(`\\b(${arr.join('|')})\\b`, flags)
 }
 
-export function genLibraryImport (list: PresetImport[]): string {
+export function genLibraryImport (list: PresetImport[], from: string): string {
   const values = list.map((item) => {
     if (isArray(item)) {
       const [name, as] = item
@@ -30,16 +36,16 @@ export function genLibraryImport (list: PresetImport[]): string {
     return item
   })
 
-  return `import {${values.join(',')}} from '${libraryName}';`
+  return `import {${values.join(',')}} from '${from}';\n`
 }
 
-export function genSideEffectsImport (value: string): string {
-  return `import '${value}';`
+export function genSideEffectsImport (from: string): string {
+  return `import '${from}';\n`
 }
 
-export function genIconPresets (prefix: string): PresetImport[] {
+export function genIconPresets (prefix: string, from: string): PresetImport[] {
   return allIcons.map((name) => {
-    return [name, `${prefix}${name}`, iconLibraryName] as PresetImport
+    return [name, `${prefix}${name}`, from] as PresetImport
   })
 }
 

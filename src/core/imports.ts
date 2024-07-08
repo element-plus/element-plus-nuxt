@@ -1,15 +1,22 @@
 import { addImportsSources } from '@nuxt/kit'
-import { libraryName } from '../config'
-import { genIconPresets } from '../utils'
+import { iconLibraryName, libraryName } from '../config'
+import { genIconPresets, resolvePath } from '../utils'
 import type { Options } from '../types'
 
-export function resolveImports (config: Options) {
+export async function resolveImports (config: Options) {
   const { imports, icon } = config
-  const icons = icon !== false ? genIconPresets(icon) : []
-  const allImports = new Set([...imports, ...icons])
+  const iconLibraryPath = await resolvePath(iconLibraryName)
+  const icons = icon !== false ? genIconPresets(icon, iconLibraryPath) : []
+  const allImports = new Set(imports)
+  const allIcons = new Set(icons)
 
   addImportsSources({
-    from: libraryName,
+    from: await resolvePath(libraryName),
     imports: [...allImports]
+  })
+
+  addImportsSources({
+    from: iconLibraryPath,
+    imports: [...allIcons]
   })
 }

@@ -6,6 +6,7 @@ import {
   camelize,
   genLibraryImport,
   genSideEffectsImport,
+  resolvePath,
   toRegExp
 } from '../utils'
 import type { PresetImport, TransformOptions } from '../types'
@@ -21,7 +22,7 @@ const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]
 const importsRegExp = toRegExp(allImportsWithStyle, 'g')
 
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
-  const { include, exclude, transformStyles, transformDirectives } = options
+  const { include, exclude, sourcemap, transformStyles, transformDirectives } = options
 
   return {
     name: `${libraryName}:transform`,
@@ -34,14 +35,14 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         return true
       }
     },
-    transform (code, id) {
-      const imports = new Set<string>()
+    async transform (code, id) {
+      const styles = new Set<string>()
       const directives: PresetImport[] = []
       const s = new MagicString(code)
       let no = 0
 
-      const addStyles = (styles?: string) => {
-        styles && imports.add(genSideEffectsImport(styles))
+      const addStyles = (style?: string) => {
+        style && styles.add(style)
       }
 
       s.replace(componentsRegExp, (full, lazy, name) => {
@@ -70,18 +71,26 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         return full
       })
 
-      if (directives.length) {
-        imports.add(genLibraryImport(directives))
-      }
+      if (styles.size || directives.length) {
+        let imports: string = ''
 
-      if (imports.size) {
-        s.prepend([...imports, ''].join('\n'))
+        if (directives.length) {
+          const path = await resolvePath(libraryName)
+          imports += genLibraryImport(directives, path)
+        }
+
+        for (const name of styles) {
+          const path = await resolvePath(name)
+          imports += genSideEffectsImport(path)
+        }
+
+        s.prepend(imports)
       }
 
       if (s.hasChanged()) {
         return {
           code: s.toString(),
-          map: options.sourcemap
+          map: sourcemap
             ? s.generateMap({ source: id, includeContent: true })
             : undefined
         }

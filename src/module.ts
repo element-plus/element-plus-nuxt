@@ -16,10 +16,13 @@ import type { Options } from './types'
 export default defineNuxtModule<Partial<Options>>({
   meta: {
     name: libraryName,
-    configKey: 'elementPlus'
+    configKey: 'elementPlus',
+    compatibility: {
+      nuxt: '>=3'
+    }
   },
   defaults,
-  setup (_options, nuxt) {
+  async setup (_options, nuxt) {
     const options = _options as Options
 
     resolveOptions()
@@ -28,7 +31,7 @@ export default defineNuxtModule<Partial<Options>>({
     nuxt.options.components !== false && resolveComponents(options)
 
     if (nuxt.options.ssr !== false) {
-      addPluginTemplate(resolveInjection(options))
+      addPluginTemplate(await resolveInjection(options))
       addPluginTemplate(resolveTeleports(options))
     }
 
