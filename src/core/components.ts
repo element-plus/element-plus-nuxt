@@ -1,12 +1,11 @@
-import { addComponent, createResolver } from '@nuxt/kit'
+import { addComponent } from '@nuxt/kit'
 import { iconLibraryName, libraryName } from '../config'
-import { genIconPresets, toArray, hyphenate } from '../utils'
+import { genIconPresets, toArray, hyphenate, resolvePath } from '../utils'
 import type { Options } from '../types'
 
 export function resolveComponents (config: Options) {
   const { components, subComponents, icon } = config
-  const { resolvePath } = createResolver(import.meta.url)
-  const icons = icon !== false ? genIconPresets(icon) : []
+  const icons = icon !== false ? genIconPresets(icon, iconLibraryName) : []
   const allComponents = new Set([...components, ...icons])
   const subComponentsMap = Object.fromEntries<string>(
     Object.entries(subComponents).reduce((all, [key, values]) => {

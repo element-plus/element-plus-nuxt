@@ -1,12 +1,12 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
 import type { NuxtOptions } from '@nuxt/schema'
-import { createResolver } from '@nuxt/kit'
 import { allImportsWithStyle, libraryName } from '../config'
 import {
   camelize,
   genLibraryImport,
   genSideEffectsImport,
+  resolvePath,
   toRegExp
 } from '../utils'
 import type { PresetImport, TransformOptions } from '../types'
@@ -22,7 +22,7 @@ const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]
 const importsRegExp = toRegExp(allImportsWithStyle, 'g')
 
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
-  const { include, exclude, transformStyles, transformDirectives } = options
+  const { include, exclude, sourcemap, transformStyles, transformDirectives } = options
 
   return {
     name: `${libraryName}:transform`,
@@ -36,7 +36,6 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       }
     },
     async transform (code, id) {
-      const { resolvePath } = createResolver(import.meta.url)
       const styles = new Set<string>()
       const directives: PresetImport[] = []
       const s = new MagicString(code)
@@ -76,7 +75,8 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         let imports: string = ''
 
         if (directives.length) {
-          imports += genLibraryImport(directives)
+          const path = await resolvePath(libraryName)
+          imports += genLibraryImport(directives, path)
         }
 
         for (const name of styles) {
@@ -90,7 +90,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       if (s.hasChanged()) {
         return {
           code: s.toString(),
-          map: options.sourcemap
+          map: sourcemap
             ? s.generateMap({ source: id, includeContent: true })
             : undefined
         }
