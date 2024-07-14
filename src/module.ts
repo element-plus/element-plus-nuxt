@@ -12,6 +12,7 @@ import {
   transformPlugin
 } from './core/index'
 import type { Options } from './types'
+import { localePlugin } from './core/localePlugn'
 
 export default defineNuxtModule<Partial<Options>>({
   meta: {
@@ -46,6 +47,13 @@ export default defineNuxtModule<Partial<Options>>({
         transformStyles: name => resolveStyles(options, name),
         transformDirectives: name => resolveDirectives(options, name)
       }))
+
+      if (options.defaultLocale && options.defaultLocale !== 'en') {
+        config.plugins.push(localePlugin.vite({
+          sourcemap: nuxt.options.sourcemap[mode],
+          locale: options.defaultLocale
+        }))
+      }
     })
 
     nuxt.hook('webpack:config', (configs) => {
@@ -60,6 +68,13 @@ export default defineNuxtModule<Partial<Options>>({
           transformStyles: name => resolveStyles(options, name),
           transformDirectives: name => resolveDirectives(options, name)
         }))
+
+        if (options.defaultLocale && options.defaultLocale !== 'en') {
+          config.plugins.push(localePlugin.webpack({
+            sourcemap: nuxt.options.sourcemap[mode],
+            locale: options.defaultLocale
+          }))
+        }
       })
     })
   }

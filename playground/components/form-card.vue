@@ -152,11 +152,11 @@ const createFilter = (queryString: string) => {
         <el-select-v2 v-model="selectValue" :options="options" />
       </el-form-item>
       <el-form-item label="tree-select">
-        <!-- <el-tree-select
+        <el-tree-select
           v-model="treeValue"
           :data="tree"
           :render-after-expand="false"
-        /> -->
+        />
       </el-form-item>
       <el-form-item label="segmented">
         <el-segmented v-model="selectValue" :options="options" size="large" />

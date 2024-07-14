@@ -142,6 +142,13 @@ export interface Options extends TransformOptions {
    * Disable automatically import icon with `false`
    */
   icon: false | string
+  /**
+   * Replace default locale, you can find locale list [here](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang).
+   *
+   * @default 'en'
+   * @example 'zh-cn'
+   */
+  defaultLocale?: string
 }
 
 declare module '@nuxt/schema' {
