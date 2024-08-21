@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-05',
   modules: [ElementPlus],
   elementPlus: {
+    defaultLocale: 'zh-cn',
     imports: ['useLocale'],
     themes: ['dark'],
     injectionID: { prefix: 100, current: 1 }

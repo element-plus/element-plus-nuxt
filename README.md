@@ -83,6 +83,12 @@ Icon prefix name, disable automatically import icon with `false`.
 
 When you change the global namespace, you must change it here as well.
 
+### defaultLocale
+
+- Type: `string`
+
+Replace default locale, you can find locale list [here](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang)
+
 ### injectionID
 
 - Type: `object`
