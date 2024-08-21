@@ -13,7 +13,8 @@ export const localePlugin = createUnplugin((options: LocalePluginOptions) => {
     name: `${libraryName}:locale`,
     enforce: 'pre',
     transformInclude (id) {
-      return !!id.match(/es\/hooks\/use-locale\/index/) //|| !id.match(/element-plus/)
+      const regExp = new RegExp(`${libraryName}/es/hooks/use-locale/index`)
+      return !!id.match(regExp)
     },
     transform (code, id) {
       const s = new MagicString(code)
