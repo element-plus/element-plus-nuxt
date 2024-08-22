@@ -9,6 +9,8 @@ export const libraryName = 'element-plus'
 
 export const iconLibraryName = '@element-plus/icons-vue'
 
+export const optimizeDeps = ['dayjs', 'dayjs/plugin/*.js', 'lodash-unified']
+
 const allComponents = Object.entries(AllComponents).reduce<string[]>((all, [key, item]) => {
   const regExp = /^El[A-Z]\w+/
   if (isVueComponent(item) && regExp.test(key) && regExp.test((item as Component).name ?? '')) {
