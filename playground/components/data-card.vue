@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const calendar = ref(new Date(2024, 1, 1))
+const value = ref(Date.now() + 1000 * 60 * 60 * 7)
 const open = ref(false)
 const ref1 = ref()
 const ref2 = ref()
@@ -83,6 +84,8 @@ const activities = [
       </el-tour>
 
       <el-statistic title="Daily active users" :value="268500" />
+
+      <el-countdown title="Start to grab" :value="value" />
     </el-space>
 
     <el-progress :percentage="50" />
