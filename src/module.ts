@@ -9,10 +9,10 @@ import {
   resolveStyles,
   resolveTeleports,
   resolveThemes,
-  transformPlugin
+  transformPlugin,
+  localePlugin
 } from './core/index'
 import type { Options } from './types'
-import { localePlugin } from './core/localePlugn'
 
 export default defineNuxtModule<Partial<Options>>({
   meta: {
