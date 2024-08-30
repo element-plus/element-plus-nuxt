@@ -25,6 +25,13 @@
 
 ## Installation
 
+> [!WARNING]
+> Since the [dayjs](https://github.com/iamkun/dayjs) used internally by element-plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), in order to ensure that it can be converted into a JavaScript module before startup, you need to add a `.npmrc` file to the root directory of the project and add the following configuration:
+> ```
+> shamefully-hoist=true
+> ```
+> Or install the `dayjs` dependency separately.
+
 ```bash
 npx nuxi@latest module add element-plus
 # or
