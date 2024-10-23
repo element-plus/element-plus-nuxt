@@ -1,5 +1,6 @@
 export * from './components'
 export * from './directives'
+export * from './globalConfig'
 export * from './imports'
 export * from './injection'
 export * from './localePlugn'

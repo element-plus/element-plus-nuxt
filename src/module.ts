@@ -3,6 +3,7 @@ import { defaults, libraryName } from './config'
 import {
   resolveComponents,
   resolveDirectives,
+  resolveGlobalConfig,
   resolveImports,
   resolveInjection,
   resolveOptions,
@@ -30,6 +31,10 @@ export default defineNuxtModule<Partial<Options>>({
     resolveThemes(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
+
+    if (options.globalConfig) {
+      addPluginTemplate(await resolveGlobalConfig(options))
+    }
 
     if (nuxt.options.ssr !== false) {
       addPluginTemplate(await resolveInjection(options))
