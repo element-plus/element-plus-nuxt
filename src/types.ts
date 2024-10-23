@@ -1,4 +1,4 @@
-import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
+import type { ElIdInjectionContext, ElZIndexInjectionContext, ConfigProviderContext } from 'element-plus'
 
 /** name: export name from the library, as: the name you want to use in your project, from: the name of library */
 export type PresetImport = string | [name: string, as?: string, from?: string]
@@ -149,6 +149,15 @@ export interface Options extends TransformOptions {
    * @example 'zh-cn'
    */
   defaultLocale?: string
+  /**
+   * Set global configuration, such as modifying the default size and z-index of the component.
+   *
+   * @example
+   * ```ts
+   * { size: 'small', zIndex: 3000 }
+   * ```
+   */
+  globalConfig?: ConfigProviderContext
 }
 
 declare module '@nuxt/schema' {

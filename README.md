@@ -26,7 +26,7 @@
 ## Installation
 
 > [!WARNING]
-> Since the [dayjs](https://github.com/iamkun/dayjs) used internally by element-plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), in order to ensure that it can be converted into a JavaScript module before startup, you need to add a `.npmrc` file to the root directory of the project and add the following configuration:
+> Since the [dayjs](https://github.com/iamkun/dayjs) used internally by element-plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), in order to ensure that it can be converted into a JavaScript modules before startup, you need to add a `.npmrc` file to the root directory of the project and add the following configuration:
 > ```
 > shamefully-hoist=true
 > ```
@@ -95,6 +95,16 @@ When you change the global namespace, you must change it here as well.
 - Type: `string`
 
 Replace default locale, you can find locale list [here](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang)
+
+e.g. `'zh-cn'`
+
+### globalConfig
+
+- Type: `object`
+
+Set global configuration, such as modifying the default `size` and `z-index` of the component.
+
+e.g. `{ size: 'small', zIndex: 3000 }`
 
 ### injectionID
 

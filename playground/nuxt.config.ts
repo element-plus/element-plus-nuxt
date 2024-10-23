@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     defaultLocale: 'zh-cn',
     imports: ['useLocale'],
     themes: ['dark'],
-    injectionID: { prefix: 100, current: 1 }
+    injectionID: { prefix: 100, current: 1 },
+    globalConfig: { size: 'small', zIndex: 1000 }
   }
 })
