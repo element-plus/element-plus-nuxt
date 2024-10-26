@@ -1,7 +1,12 @@
 import { addComponent } from '@nuxt/kit'
 import { iconLibraryName, libraryName } from '../config'
-import { genIconPresets, toArray, hyphenate, resolvePath } from '../utils'
+import { genIconPresets, toArray, resolvePath, hyphenate } from '../utils'
 import type { Options } from '../types'
+
+export function getComponentPath (name: string): string {
+  const dir = hyphenate(name.slice(2))
+  return `es/components/${dir}/index.mjs`
+}
 
 export function resolveComponents (config: Options) {
   const { components, subComponents, icon } = config
@@ -19,9 +24,8 @@ export function resolveComponents (config: Options) {
   allComponents.forEach(async (item) => {
     const [name, alias, from] = toArray(item)
     const componentName = subComponentsMap[name] || name
-    const dir = hyphenate(componentName.slice(2))
     const filePath = from !== iconLibraryName
-      ? `${libraryName}/es/components/${dir}/index.mjs`
+      ? `${libraryName}/${getComponentPath(componentName)}`
       : from
 
     addComponent({

@@ -2,6 +2,7 @@ import * as AllComponents from 'element-plus'
 import * as AllIcons from '@element-plus/icons-vue'
 import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
 import type { Component } from 'vue'
+import { getComponentPath } from './core/components'
 import { isVueComponent } from './utils'
 import type { Options, PresetDirectives, PresetImport } from './types'
 
@@ -28,7 +29,14 @@ export const allImportsWithStyle: string[] = [
   'ElNotification'
 ]
 
-const allImports: PresetImport[] = allImportsWithStyle
+const allImports: PresetImport[] = [
+  ...allImportsWithStyle.map((name) => {
+    return [name, getComponentPath(name)] as PresetImport
+  }),
+  ['ID_INJECTION_KEY', 'es/hooks/use-id/index.mjs'],
+  ['ZINDEX_INJECTION_KEY', 'es/hooks/use-z-index/index.mjs'],
+  ['provideGlobalConfig', 'es/components/config-provider/src/hooks/use-global-config.mjs']
+]
 
 const allNoStylesComponents: string[] = [
   'ElAutoResizer',

@@ -7,7 +7,9 @@ export default defineNuxtConfig({
   modules: [ElementPlus],
   elementPlus: {
     defaultLocale: 'zh-cn',
-    imports: ['useLocale'],
+    imports: [
+      ['useLocale', 'es/hooks/use-locale/index.mjs']
+    ],
     themes: ['dark'],
     injectionID: { prefix: 100, current: 1 },
     globalConfig: { size: 'small', zIndex: 1000 }

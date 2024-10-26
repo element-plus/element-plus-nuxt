@@ -1,7 +1,10 @@
 import type { ElIdInjectionContext, ElZIndexInjectionContext, ConfigProviderContext } from 'element-plus'
 
 /** name: export name from the library, as: the name you want to use in your project, from: the name of library */
-export type PresetImport = string | [name: string, as?: string, from?: string]
+export type PresetComponent = string | [name: string, as?: string, from?: string]
+
+/** name: export name from the library, path: the file path in the component directory */
+export type PresetImport = [name: string | string[], path: string]
 
 /** directive: export name from the library, name: export name with style */
 export type PresetDirectives = Record<string, string | [directive: string, name?: string]>
@@ -25,7 +28,7 @@ export interface Options extends TransformOptions {
    *  ['ElSubMenu']
    * ```
    */
-  components: PresetImport[]
+  components: PresetComponent[]
   /**
    * A map of components that the definition file of subComponent is in its parent component.
    */
@@ -46,16 +49,14 @@ export interface Options extends TransformOptions {
   /**
    * A list of imports that need to be automatically imported externally.
    *
-   * @default
-   * ```ts
-   *  ['ElLoading', 'ElMessage', 'ElMessageBox', 'ElNotification']
-   * ```
-   *
    * When you need to add automatically import content from Element Plus, you can add it here.
    *
    * @example
    * ```ts
-   *  ['useLocale']
+   *  [
+   *    ['useLocale', 'es/hooks/use-locale/index.mjs'],
+   *    [['castArray', 'unique'], 'es/utils/arrays.mjs']
+   *  ]
    * ```
    *
    * @before
