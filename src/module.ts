@@ -24,7 +24,7 @@ export default defineNuxtModule<Partial<Options>>({
     }
   },
   defaults,
-  async setup (_options, nuxt) {
+  setup (_options, nuxt) {
     const options = _options as Options
 
     resolveOptions()
@@ -33,11 +33,11 @@ export default defineNuxtModule<Partial<Options>>({
     nuxt.options.components !== false && resolveComponents(options)
 
     if (options.globalConfig) {
-      addPluginTemplate(await resolveGlobalConfig(options))
+      addPluginTemplate(resolveGlobalConfig(options))
     }
 
     if (nuxt.options.ssr !== false) {
-      addPluginTemplate(await resolveInjection(options))
+      addPluginTemplate(resolveInjection(options))
       addPluginTemplate(resolveTeleports(options))
     }
 

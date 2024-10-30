@@ -152,6 +152,15 @@ If there are directives that are not imported automatically from Element Plus, y
 
 If you wish to add automatically import content from Element Plus, you can add it here.
 
+e.g. 
+
+```ts
+[
+  ['useLocale', 'es/hooks/use-locale/index.mjs'],
+  [['castArray', 'unique'], 'es/utils/arrays.mjs']
+],
+```
+
 ### noStylesComponents
 
 - Type: `array`

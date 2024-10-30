@@ -1,7 +1,7 @@
 import type { Component } from 'vue'
 import { createResolver } from '@nuxt/kit'
 import { allIcons } from './config'
-import type { PresetImport } from './types'
+import type { PresetComponent } from './types'
 
 export function resolvePath (path: string): Promise<string> {
   const { resolvePath } = createResolver(import.meta.url)
@@ -26,26 +26,19 @@ export function toRegExp (arr: string[], flags?: string): RegExp {
   return new RegExp(`\\b(${arr.join('|')})\\b`, flags)
 }
 
-export function genLibraryImport (list: PresetImport[], from: string): string {
-  const values = list.map((item) => {
-    if (isArray(item)) {
-      const [name, as] = item
-      return `${name} as ${as}`
-    }
-
-    return item
-  })
-
-  return `import {${values.join(',')}} from '${from}';\n`
+export async function genLibraryImport ([name, as, from]: Required<Exclude<PresetComponent, string>>): Promise<string> {
+  const fromPath = await resolvePath(from)
+  return `import { ${name} as ${as} } from '${fromPath}';\n`
 }
 
-export function genSideEffectsImport (from: string): string {
-  return `import '${from}';\n`
+export async function genSideEffectsImport (from: string): Promise<string> {
+  const fromPath = await resolvePath(from)
+  return `import '${fromPath}';\n`
 }
 
-export function genIconPresets (prefix: string, from: string): PresetImport[] {
+export function genIconPresets (prefix: string, from?: string): Exclude<PresetComponent, string>[] {
   return allIcons.map((name) => {
-    return [name, `${prefix}${name}`, from] as PresetImport
+    return [name, `${prefix}${name}`, from] as Exclude<PresetComponent, string>
   })
 }
 

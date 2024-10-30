@@ -6,15 +6,14 @@ import {
   camelize,
   genLibraryImport,
   genSideEffectsImport,
-  resolvePath,
   toRegExp
 } from '../utils'
-import type { PresetImport, TransformOptions } from '../types'
+import type { PresetComponent, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
   sourcemap?: NuxtOptions['sourcemap']['client']
   transformStyles: (name: string) => undefined | string
-  transformDirectives: (name: string) => undefined | [name: string, styles?: string]
+  transformDirectives: (name: string) => undefined | [name: string, path: string, style?: string]
 }
 
 const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
@@ -37,7 +36,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
     },
     async transform (code, id) {
       const styles = new Set<string>()
-      const directives: PresetImport[] = []
+      const directives: Required<Exclude<PresetComponent, string>>[] = []
       const s = new MagicString(code)
       let no = 0
 
@@ -59,12 +58,12 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         const directiveConfig = transformDirectives(camelize(name))
 
         if (directiveConfig) {
-          const [directive, styles] = directiveConfig
+          const [directive, path, style] = directiveConfig
           const aliasName = `__el_directive_${no}`
 
           no += 1
-          addStyles(styles)
-          directives.push([directive, aliasName])
+          addStyles(style)
+          directives.push([directive, aliasName, path])
           return aliasName
         }
 
@@ -74,14 +73,12 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       if (styles.size || directives.length) {
         let imports: string = ''
 
-        if (directives.length) {
-          const path = await resolvePath(libraryName)
-          imports += genLibraryImport(directives, path)
+        for (const directive of directives) {
+          imports += await genLibraryImport(directive)
         }
 
-        for (const name of styles) {
-          const path = await resolvePath(name)
-          imports += genSideEffectsImport(path)
+        for (const style of styles) {
+          imports += await genSideEffectsImport(style)
         }
 
         s.prepend(imports)
