@@ -1,8 +1,8 @@
 import { libraryName } from '../config'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
 /** Inject some additional configuration into Vue at runtime */
-export function resolveInjection (config: Options) {
+export function resolveInjection (config: ModuleOptions) {
   const { injectionID, injectionZIndex } = config
 
   return {

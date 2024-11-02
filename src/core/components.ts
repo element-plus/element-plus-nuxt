@@ -1,14 +1,14 @@
 import { addComponent } from '@nuxt/kit'
 import { iconLibraryName, libraryName } from '../config'
 import { genIconPresets, toArray, resolvePath, hyphenate } from '../utils'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
 export function getComponentPath (name: string): string {
   const dir = hyphenate(name.slice(2))
   return `es/components/${dir}/index.mjs`
 }
 
-export function resolveComponents (config: Options) {
+export function resolveComponents (config: ModuleOptions) {
   const { components, subComponents, icon } = config
   const icons = icon !== false ? genIconPresets(icon, iconLibraryName) : []
   const allComponents = new Set([...components, ...icons])

@@ -13,9 +13,10 @@ import {
   transformPlugin,
   localePlugin
 } from './core/index'
-import type { Options } from './types'
+import type { ModuleOptions } from './types'
+export type { ModuleOptions } from './types'
 
-export default defineNuxtModule<Partial<Options>>({
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: libraryName,
     configKey: 'elementPlus',
@@ -25,7 +26,7 @@ export default defineNuxtModule<Partial<Options>>({
   },
   defaults,
   setup (_options, nuxt) {
-    const options = _options as Options
+    const options = _options as ModuleOptions
 
     resolveOptions()
     resolveThemes(options)

@@ -1,9 +1,9 @@
 import { useNuxt } from '@nuxt/kit'
 import { libraryName } from '../config'
 import { resolvePath } from '../utils'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
-export function resolveThemes (config: Options) {
+export function resolveThemes (config: ModuleOptions) {
   const nuxt = useNuxt()
   const { themes, importStyle } = config
   const allThemes = new Set(themes)

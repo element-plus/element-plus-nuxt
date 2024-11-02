@@ -4,7 +4,7 @@ import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plu
 import type { Component } from 'vue'
 import { getComponentPath } from './core/components'
 import { isVueComponent } from './utils'
-import type { Options, PresetDirectives, PresetImport } from './types'
+import type { ModuleOptions, PresetDirectives, PresetImport } from './types'
 
 export const libraryName = 'element-plus'
 
@@ -98,7 +98,7 @@ const defaultExclude: RegExp[] = [
   /[\\/]\.nuxt[\\/]/
 ]
 
-export const defaults: Options = {
+export const defaults: ModuleOptions = {
   components: allComponents,
   subComponents: allSubComponents,
   directives: allDirectives,

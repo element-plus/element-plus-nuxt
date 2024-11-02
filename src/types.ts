@@ -15,7 +15,7 @@ export interface TransformOptions {
   exclude: RegExp[]
 }
 
-export interface Options extends TransformOptions {
+export interface ModuleOptions extends TransformOptions {
   /**
    * A list of components that need to be automatically imported externally.
    *
@@ -159,13 +159,4 @@ export interface Options extends TransformOptions {
    * ```
    */
   globalConfig?: ConfigProviderContext
-}
-
-declare module '@nuxt/schema' {
-  interface NuxtConfig {
-    elementPlus?: Partial<Options>
-  }
-  interface NuxtOptions {
-    elementPlus?: Partial<Options>
-  }
 }
