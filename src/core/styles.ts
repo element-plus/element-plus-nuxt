@@ -1,8 +1,8 @@
 import { allImportsWithStyle, libraryName } from '../config'
 import { hyphenate } from '../utils'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
-export function getStyleDir (config: Options, name: string) {
+export function getStyleDir (config: ModuleOptions, name: string) {
   if (config.importStyle === false) {
     return undefined
   }
@@ -12,7 +12,7 @@ export function getStyleDir (config: Options, name: string) {
   return `${libraryName}/es/components/${dir}/style/${type}.mjs`
 }
 
-export function resolveStyles (config: Options, name: string) {
+export function resolveStyles (config: ModuleOptions, name: string) {
   const { components, noStylesComponents } = config
   const allComponents = [...components, ...allImportsWithStyle]
 

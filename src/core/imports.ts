@@ -1,9 +1,9 @@
 import { addImportsSources } from '@nuxt/kit'
 import { iconLibraryName, libraryName } from '../config'
 import { genIconPresets, resolvePath, toArray } from '../utils'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
-export async function resolveImports (config: Options) {
+export async function resolveImports (config: ModuleOptions) {
   const { imports, icon } = config
   const icons = icon !== false ? genIconPresets(icon) : []
   const allImports = new Set(imports)

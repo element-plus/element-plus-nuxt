@@ -1,7 +1,7 @@
 import { libraryName } from '../config'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
-export function resolveTeleports (config: Options) {
+export function resolveTeleports (config: ModuleOptions) {
   const { namespace, appendTo } = config
   const defaultId = `#${namespace}-popper-container-`
 

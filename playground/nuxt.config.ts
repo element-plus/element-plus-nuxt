@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import ElementPlus from '..'
+import ElementPlus from '../src/module'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },

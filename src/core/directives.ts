@@ -1,10 +1,10 @@
 import { libraryName } from '../config'
 import { toArray } from '../utils'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 import { getComponentPath, getStyleDir } from './index'
 
 export function resolveDirectives (
-  config: Options,
+  config: ModuleOptions,
   name: string
 ): undefined | [name: string, path: string, style?: string] {
   const { directives } = config

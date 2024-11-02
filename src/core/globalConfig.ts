@@ -1,7 +1,7 @@
 import { libraryName } from '../config'
-import type { Options } from '../types'
+import type { ModuleOptions } from '../types'
 
-export function resolveGlobalConfig (config: Options) {
+export function resolveGlobalConfig (config: ModuleOptions) {
   const { globalConfig } = config
 
   return {
