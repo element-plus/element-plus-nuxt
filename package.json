@@ -1,11 +1,12 @@
 {
   "name": "@element-plus/nuxt",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Element Plus module for Nuxt",
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
