@@ -8,4 +8,6 @@ export function resolveOptions () {
   nuxt.options.vite.optimizeDeps ||= {}
   nuxt.options.vite.optimizeDeps.include ||= []
   nuxt.options.vite.optimizeDeps.include.push(...optimizeDeps)
+  nuxt.options.vite.optimizeDeps.exclude ||= []
+  nuxt.options.vite.optimizeDeps.exclude.push(libraryName)
 }
