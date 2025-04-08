@@ -6,6 +6,7 @@ import {
   resolveGlobalConfig,
   resolveImports,
   resolveInjection,
+  resolveMethods,
   resolveOptions,
   resolveStyles,
   resolveTeleports,
@@ -40,6 +41,7 @@ export default defineNuxtModule<ModuleOptions>({
     if (nuxt.options.ssr !== false) {
       addPluginTemplate(resolveInjection(options))
       addPluginTemplate(resolveTeleports(options))
+      addPluginTemplate(resolveMethods())
     }
 
     nuxt.hook('vite:extendConfig', (config, { isClient }) => {
