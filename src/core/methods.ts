@@ -11,7 +11,7 @@ function camelize(value) {
   return value.replace(/(^|-)(\\w)/g, (a, b, c) => c.toUpperCase())
 }
 
-const allImportsWithStyle = [
+const methodNames = [
   'ElLoading',
   'ElMessage',
   'ElMessageBox',
@@ -24,10 +24,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:rendered', (ctx) => {
     const allComps = [
       ...(ctx.renderResult?.renderStyles()?.matchAll(/el-\\w+\\.css/g) ?? []),
-    ].flatMap(([comp]) => comp)
+    ].map(([comp]) => comp)
     methodComps.value = [...new Set(allComps)]
       .map((comp) => camelize(comp.substring(0, comp.length - 4)))
-      .filter((comp) => allImportsWithStyle.includes(comp))
+      .filter((comp) => methodNames.includes(comp))
   })
 
   nuxtApp.hook('app:beforeMount', async (app) => {
