@@ -27,19 +27,18 @@ export default defineNuxtModule<ModuleOptions>({
   defaults,
   setup (_options, nuxt) {
     const options = _options as ModuleOptions
-    const autoImport = nuxt.options.imports.autoImport
 
     resolveOptions()
     resolveThemes(options)
-    autoImport !== false && resolveImports(options)
+    nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
 
     if (options.globalConfig) {
-      addPluginTemplate(resolveGlobalConfig(options, autoImport))
+      addPluginTemplate(resolveGlobalConfig(options))
     }
 
     if (nuxt.options.ssr !== false) {
-      addPluginTemplate(resolveInjection(options, autoImport))
+      addPluginTemplate(resolveInjection(options))
       addPluginTemplate(resolveTeleports(options))
     }
 
