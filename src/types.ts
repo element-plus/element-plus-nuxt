@@ -72,6 +72,20 @@ export interface ModuleOptions extends TransformOptions {
    */
   imports: PresetImport[]
   /**
+   *
+   * List of imports that will be imported whether if autoImports is disabled.
+   *
+   * @default
+   * ```ts
+   * [
+   *   ["ID_INJECTION_KEY", "es/hooks/use-id/index.mjs"],
+   *   ["ZINDEX_INJECTION_KEY", "es/hooks/use-z-index/index.mjs"],
+   *   ["provideGlobalConfig", "es/components/config-provider/src/hooks/use-global-config.mjs"],
+   * ]
+   * ```
+   */
+  baseImports: PresetImport[]
+  /**
    * import style css or sass(scss) with components
    *
    * @default 'css'

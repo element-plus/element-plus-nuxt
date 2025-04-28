@@ -11,7 +11,8 @@ import {
   resolveTeleports,
   resolveThemes,
   transformPlugin,
-  localePlugin
+  localePlugin,
+  resolveBaseImports,
 } from './core/index'
 import type { ModuleOptions } from './types'
 export type { ModuleOptions } from './types'
@@ -30,6 +31,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     resolveOptions()
     resolveThemes(options)
+    resolveBaseImports(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
 
