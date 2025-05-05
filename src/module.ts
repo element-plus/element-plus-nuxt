@@ -4,6 +4,7 @@ import {
   resolveComponents,
   resolveDirectives,
   resolveGlobalConfig,
+  resolveBaseImports,
   resolveImports,
   resolveInjection,
   resolveOptions,
@@ -11,8 +12,7 @@ import {
   resolveTeleports,
   resolveThemes,
   transformPlugin,
-  localePlugin,
-  resolveBaseImports,
+  localePlugin
 } from './core/index'
 import type { ModuleOptions } from './types'
 export type { ModuleOptions } from './types'
@@ -26,9 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults,
-  setup (_options, nuxt) {
-    const options = _options as ModuleOptions
-
+  setup (options, nuxt) {
     resolveOptions()
     resolveThemes(options)
     resolveBaseImports(options)

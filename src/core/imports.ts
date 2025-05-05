@@ -3,7 +3,7 @@ import { iconLibraryName, libraryName } from '../config'
 import { genIconPresets, resolvePath, toArray } from '../utils'
 import type { ModuleOptions, PresetImport } from '../types'
 
-function _resolveImports(...imports: PresetImport[]) {
+function _resolveImports (...imports: PresetImport[]) {
   imports.forEach(async ([name, path]) => {
     addImportsSources({
       from: await resolvePath(`${libraryName}/${path}`),
@@ -26,9 +26,8 @@ export async function resolveImports (config: ModuleOptions) {
   })
 }
 
-export function resolveBaseImports(config: ModuleOptions) {
+export function resolveBaseImports (config: ModuleOptions) {
   const { baseImports } = config
 
   _resolveImports(...baseImports)
 }
-

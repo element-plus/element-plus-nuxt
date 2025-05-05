@@ -32,10 +32,10 @@ export const allImportsWithStyle: string[] = [
 const allImports: PresetImport[] = [
   ...allImportsWithStyle.map((name) => {
     return [name, getComponentPath(name)] as PresetImport
-  }),
+  })
 ]
 
-const allBaseImports: PresetImport[] =  [
+const allBaseImports: PresetImport[] = [
   ['ID_INJECTION_KEY', 'es/hooks/use-id/index.mjs'],
   ['ZINDEX_INJECTION_KEY', 'es/hooks/use-z-index/index.mjs'],
   ['provideGlobalConfig', 'es/components/config-provider/src/hooks/use-global-config.mjs']
