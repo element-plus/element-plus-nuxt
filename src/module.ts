@@ -4,6 +4,7 @@ import {
   resolveComponents,
   resolveDirectives,
   resolveGlobalConfig,
+  resolveBaseImports,
   resolveImports,
   resolveInjection,
   resolveOptions,
@@ -25,11 +26,10 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults,
-  setup (_options, nuxt) {
-    const options = _options as ModuleOptions
-
+  setup (options, nuxt) {
     resolveOptions()
     resolveThemes(options)
+    resolveBaseImports(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
 
