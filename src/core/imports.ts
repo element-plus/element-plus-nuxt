@@ -1,7 +1,8 @@
 import { addImportsSources } from '@nuxt/kit'
-import { iconLibraryName, libraryName } from '../config'
+import { allImportsWithStyle, iconLibraryName, libraryName } from '../config'
 import { genIconPresets, resolvePath, toArray } from '../utils'
 import type { ModuleOptions, PresetImport } from '../types'
+import { getComponentPath } from './index'
 
 function _resolveImports (imports: Set<PresetImport>) {
   imports.forEach(async ([name, path]) => {
@@ -15,7 +16,10 @@ function _resolveImports (imports: Set<PresetImport>) {
 export async function resolveImports (config: ModuleOptions) {
   const { imports, icon } = config
   const icons = icon !== false ? genIconPresets(icon) : []
-  const allImports = new Set(imports)
+  const importsWithStyle = allImportsWithStyle.map((name) => {
+    return [name, getComponentPath(name)] as PresetImport
+  })
+  const allImports = new Set([...imports, ...importsWithStyle])
   const allIcons = new Set(icons)
 
   _resolveImports(allImports)
