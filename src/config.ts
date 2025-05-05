@@ -2,7 +2,6 @@ import * as AllComponents from 'element-plus'
 import * as AllIcons from '@element-plus/icons-vue'
 import type { ElIdInjectionContext, ElZIndexInjectionContext } from 'element-plus'
 import type { Component } from 'vue'
-import { getComponentPath } from './core/components'
 import { isVueComponent } from './utils'
 import type { ModuleOptions, PresetDirectives, PresetImport } from './types'
 
@@ -29,11 +28,7 @@ export const allImportsWithStyle: string[] = [
   'ElNotification'
 ]
 
-const allImports: PresetImport[] = [
-  ...allImportsWithStyle.map((name) => {
-    return [name, getComponentPath(name)] as PresetImport
-  })
-]
+const allImports: PresetImport[] = []
 
 const allBaseImports: PresetImport[] = [
   ['ID_INJECTION_KEY', 'es/hooks/use-id/index.mjs'],
