@@ -38,6 +38,11 @@ npx nuxi@latest module add element-plus
 npm i element-plus @element-plus/nuxt -D
 ```
 
+## Cinfiguration
+
+> [!WARNING]
+> At present, the method cannot automatically obtain the context, and you need to manually configure [installMethods](#installmethods) in the options.
+
 ```ts
 export default defineNuxtConfig({
   modules: [
@@ -82,6 +87,14 @@ e.g. `['dark']`
 - Default: `ElIcon`
 
 Icon prefix name, disable automatically import icon with `false`.
+
+### installMethods
+
+- Type: `array`
+
+List of methods that need to be installed.
+
+e.g. `['ElLoading', 'ElMessage', 'ElMessageBox', 'ElNotification']`
 
 ### namespace
 
@@ -160,6 +173,12 @@ e.g.
   [['castArray', 'unique'], 'es/utils/arrays.mjs']
 ],
 ```
+
+### baseImports
+
+- Type: `array`
+
+List of imports that will be imported whether if autoImports is disabled.
 
 ### noStylesComponents
 

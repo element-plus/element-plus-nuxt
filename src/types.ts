@@ -173,4 +173,13 @@ export interface ModuleOptions extends TransformOptions {
    * ```
    */
   globalConfig?: ConfigProviderContext
+  /**
+   * List of methods that need to be installed.
+   *
+   * @example
+   * ```ts
+   * ['ElLoading', 'ElMessage', 'ElMessageBox', 'ElNotification']
+   * ```
+   */
+  installMethods: Array<'ElLoading' | 'ElMessage' | 'ElMessageBox' | 'ElNotification'>
 }

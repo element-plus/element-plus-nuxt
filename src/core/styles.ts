@@ -1,4 +1,4 @@
-import { allImportsWithStyle, libraryName } from '../config'
+import { allMethods, libraryName } from '../config'
 import { hyphenate } from '../utils'
 import type { ModuleOptions } from '../types'
 
@@ -14,7 +14,7 @@ export function getStyleDir (config: ModuleOptions, name: string) {
 
 export function resolveStyles (config: ModuleOptions, name: string) {
   const { components, noStylesComponents } = config
-  const allComponents = [...components, ...allImportsWithStyle]
+  const allComponents = [...components, ...allMethods]
 
   if (!allComponents.includes(name) || noStylesComponents.includes(name)) {
     return undefined

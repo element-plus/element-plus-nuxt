@@ -1,7 +1,7 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
 import type { NuxtOptions } from '@nuxt/schema'
-import { allImportsWithStyle, libraryName } from '../config'
+import { allMethods, libraryName } from '../config'
 import {
   camelize,
   genLibraryImport,
@@ -18,7 +18,7 @@ interface PluginOptions extends TransformOptions {
 
 const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
 const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]*[^)]*\)/g
-const importsRegExp = toRegExp(allImportsWithStyle, 'g')
+const methodsRegExp = toRegExp(allMethods, 'g')
 
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
   const { include, exclude, sourcemap, transformStyles, transformDirectives } = options
@@ -49,7 +49,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         return full
       })
 
-      s.replace(importsRegExp, (full, name) => {
+      s.replace(methodsRegExp, (full, name) => {
         addStyles(transformStyles(camelize(name)))
         return full
       })
