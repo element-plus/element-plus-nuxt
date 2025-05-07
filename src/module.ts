@@ -11,6 +11,7 @@ import {
   resolveStyles,
   resolveTeleports,
   resolveThemes,
+  resolveMethods,
   transformPlugin,
   localePlugin
 } from './core/index'
@@ -33,13 +34,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
 
-    if (options.globalConfig) {
-      addPluginTemplate(resolveGlobalConfig(options))
-    }
+    options.globalConfig && addPluginTemplate(resolveGlobalConfig(options))
 
     if (nuxt.options.ssr !== false) {
       addPluginTemplate(resolveInjection(options))
       addPluginTemplate(resolveTeleports(options))
+      options.installMethods.length && addPluginTemplate(resolveMethods(options))
     }
 
     nuxt.hook('vite:extendConfig', (config, { isClient }) => {

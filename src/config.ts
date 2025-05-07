@@ -21,7 +21,7 @@ const allComponents = Object.entries(AllComponents).reduce<string[]>((all, [key,
 
 export const allIcons = Object.keys(AllIcons)
 
-export const allImportsWithStyle: string[] = [
+export const allMethods: string[] = [
   'ElLoading',
   'ElMessage',
   'ElMessageBox',
@@ -111,5 +111,6 @@ export const defaults: ModuleOptions = {
   exclude: defaultExclude,
   namespace: 'el',
   appendTo: [],
+  installMethods: [],
   icon: 'ElIcon'
 }

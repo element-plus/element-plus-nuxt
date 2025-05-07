@@ -19,7 +19,7 @@ export function isVueComponent (value: any): value is Component {
 export function toArray<T extends any | any[]> (
   value: T
 ): T extends any[] ? T : T[] {
-  return isArray(value) ? value : [value] as any
+  return (isArray(value) ? value : [value]) as any
 }
 
 export function toRegExp (arr: string[], flags?: string): RegExp {
