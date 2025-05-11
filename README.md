@@ -38,7 +38,7 @@ npx nuxi@latest module add element-plus
 npm i element-plus @element-plus/nuxt -D
 ```
 
-## Cinfiguration
+## Configuration
 
 > [!WARNING]
 > At present, the method cannot automatically obtain the context, and you need to manually configure [installMethods](#installmethods) in the options.
