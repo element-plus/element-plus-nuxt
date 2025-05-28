@@ -1,11 +1,25 @@
 import type { Component } from 'vue'
 import { createResolver } from '@nuxt/kit'
 import { allIcons } from './config'
+import type { NuxtConfigLayer } from '@nuxt/schema'
 import type { PresetComponent } from './types'
 
 export function resolvePath (path: string): Promise<string> {
   const { resolvePath } = createResolver(import.meta.url)
   return resolvePath(path)
+}
+
+export function getLayersDir(layers: NuxtConfigLayer[]) {
+  const list = []
+
+  for (const layer of layers) {
+    const srcDir = layer.config.srcDir || layer.cwd
+    if (srcDir.includes('node_modules') && layer.config.elementPlus?.importStyle !== false) {
+      list.push(srcDir)
+    }
+  }
+
+  return list
 }
 
 export function isArray (value: any): value is any[] {
