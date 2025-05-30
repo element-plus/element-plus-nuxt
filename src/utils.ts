@@ -1,7 +1,7 @@
 import type { Component } from 'vue'
 import { createResolver } from '@nuxt/kit'
-import { allIcons } from './config'
 import type { NuxtConfigLayer } from '@nuxt/schema'
+import { allIcons } from './config'
 import type { PresetComponent } from './types'
 
 export function resolvePath (path: string): Promise<string> {
@@ -9,7 +9,7 @@ export function resolvePath (path: string): Promise<string> {
   return resolvePath(path)
 }
 
-export function getLayersDir(layers: NuxtConfigLayer[]) {
+export function getLayersDir (layers: NuxtConfigLayer[]) {
   const list = []
 
   for (const layer of layers) {
