@@ -15,6 +15,7 @@ import {
   transformPlugin,
   localePlugin
 } from './core/index'
+import { getLayersDir } from './utils'
 import type { ModuleOptions } from './types'
 export type { ModuleOptions } from './types'
 
@@ -28,6 +29,8 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   setup (options, nuxt) {
+    const layers = getLayersDir(nuxt.options._layers)
+
     resolveOptions()
     resolveThemes(options)
     resolveBaseImports(options)
@@ -47,6 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       config.plugins = config.plugins || []
       config.plugins.push(transformPlugin.vite({
+        layers,
         include: options.include,
         exclude: options.exclude,
         sourcemap: nuxt.options.sourcemap[mode],
@@ -68,6 +72,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
+          layers,
           include: options.include,
           exclude: options.exclude,
           sourcemap: nuxt.options.sourcemap[mode],
