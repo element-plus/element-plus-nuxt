@@ -54,6 +54,21 @@ const load = () => {
           {{ i }}
         </li>
       </ul>
+
+      <div class="splitter">
+        <el-splitter>
+          <el-splitter-panel size="30%">
+            <div class="splitter-panel">
+              1
+            </div>
+          </el-splitter-panel>
+          <el-splitter-panel :min="200">
+            <div class="splitter-panel">
+              2
+            </div>
+          </el-splitter-panel>
+        </el-splitter>
+      </div>
     </el-watermark>
   </el-card>
 </template>
@@ -109,5 +124,14 @@ const load = () => {
 }
 .infinite-list .infinite-list-item + .list-item {
   margin-top: 10px;
+}
+
+.splitter {
+  margin: 10px;
+  height: 250px;
+  border: 1px solid var(--el-border-color-light);
+}
+.splitter .splitter-panel {
+  padding: 10px;
 }
 </style>

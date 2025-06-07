@@ -52,7 +52,7 @@
     "@nuxt/schema": "^3.13.2",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@types/node": "^22.8.6",
-    "element-plus": "^2.8.7",
+    "element-plus": "^2.10.1",
     "eslint": "^8.57.1",
     "nuxi": "^3.15.0",
     "nuxt": "^3.13.2",
