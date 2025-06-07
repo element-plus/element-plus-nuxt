@@ -5,6 +5,7 @@ interface RestaurantItem {
 }
 
 const value = ref('Nuxt module playground!')
+const tagValue = ref([])
 const autocompleteValue = ref()
 const cascaderValue = ref()
 const dateValue = ref()
@@ -113,6 +114,9 @@ const createFilter = (queryString: string) => {
     <el-form label-width="150">
       <el-form-item label="input">
         <el-input v-model="value" clearable />
+      </el-form-item>
+      <el-form-item label="input-tag">
+        <el-input-tag v-model="tagValue" clearable />
       </el-form-item>
       <el-form-item label="autocomplete">
         <el-autocomplete
