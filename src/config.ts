@@ -66,6 +66,7 @@ const allSubComponents: Record<string, string[]> = {
   ElRadio: ['ElRadioGroup', 'ElRadioButton'],
   ElSkeleton: ['ElSkeletonItem'],
   ElSelect: ['ElOption', 'ElOptionGroup'],
+  ElSplitter: ['ElSplitterPanel'],
   ElSteps: ['ElStep'],
   ElTable: ['ElTableColumn'],
   ElTableV2: ['ElAutoResizer'],
