@@ -12,6 +12,7 @@ import type { PresetComponent, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
   layers: string[]
+  cache: boolean | undefined
   sourcemap?: NuxtOptions['sourcemap']['client']
   transformStyles: (name: string) => undefined | string
   transformDirectives: (name: string) => undefined | [name: string, path: string, style?: string]
@@ -22,7 +23,7 @@ const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]
 const methodsRegExp = toRegExp(allMethods, 'g')
 
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
-  const { layers, include, exclude, sourcemap, transformStyles, transformDirectives } = options
+  const { cache, layers, include, exclude, sourcemap, transformStyles, transformDirectives } = options
 
   return {
     name: `${libraryName}:transform`,
@@ -78,7 +79,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         let imports: string = ''
 
         for (const directive of directives) {
-          imports += await genLibraryImport(directive)
+          imports += await genLibraryImport(directive, cache)
         }
 
         for (const style of styles) {

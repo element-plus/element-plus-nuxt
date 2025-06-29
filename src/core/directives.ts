@@ -1,4 +1,3 @@
-import { libraryName } from '../config'
 import { toArray } from '../utils'
 import type { ModuleOptions } from '../types'
 import { getComponentPath, getStyleDir } from './index'
@@ -15,5 +14,5 @@ export function resolveDirectives (
   const path = getComponentPath(styleName ?? directive)
   const style = styleName && getStyleDir(config, styleName)
 
-  return [directive, `${libraryName}/${path}`, style]
+  return [directive, path, style]
 }

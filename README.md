@@ -112,6 +112,17 @@ Replace default locale, you can find locale list [here](https://github.com/eleme
 
 e.g. `'zh-cn'`
 
+### cache
+
+- Type: `boolean`
+- Default: `false`
+
+Whether to cache the element-plus components and directives.
+
+> [!WARNING]
+> If you enable this feature, you will get faster loading speed in development mode.
+> However, please note that this will make the `defaultLocale` ineffective in development mode.
+
 ### globalConfig
 
 - Type: `object`
