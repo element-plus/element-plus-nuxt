@@ -1,6 +1,7 @@
-import { addPluginTemplate, defineNuxtModule } from '@nuxt/kit'
+import { addPluginTemplate, addTemplate, defineNuxtModule } from '@nuxt/kit'
 import { defaults, libraryName } from './config'
 import {
+  resolveCache,
   resolveComponents,
   resolveDirectives,
   resolveGlobalConfig,
@@ -31,12 +32,12 @@ export default defineNuxtModule<ModuleOptions>({
   setup (options, nuxt) {
     const layers = getLayersDir(nuxt.options._layers)
 
-    resolveOptions()
+    resolveOptions(options)
     resolveThemes(options)
     resolveBaseImports(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
-
+    options.cache && addTemplate(resolveCache())
     options.globalConfig && addPluginTemplate(resolveGlobalConfig(options))
 
     if (nuxt.options.ssr !== false) {
@@ -51,6 +52,7 @@ export default defineNuxtModule<ModuleOptions>({
       config.plugins = config.plugins || []
       config.plugins.push(transformPlugin.vite({
         layers,
+        cache: options.cache,
         include: options.include,
         exclude: options.exclude,
         sourcemap: nuxt.options.sourcemap[mode],
@@ -73,6 +75,7 @@ export default defineNuxtModule<ModuleOptions>({
         config.plugins = config.plugins || []
         config.plugins.push(transformPlugin.webpack({
           layers,
+          cache: options.cache,
           include: options.include,
           exclude: options.exclude,
           sourcemap: nuxt.options.sourcemap[mode],

@@ -1,6 +1,6 @@
 import { addComponent } from '@nuxt/kit'
-import { iconLibraryName, libraryName } from '../config'
-import { genIconPresets, toArray, resolvePath, hyphenate } from '../utils'
+import { iconLibraryName } from '../config'
+import { genIconPresets, toArray, resolvePath, hyphenate, resolveComponentPath } from '../utils'
 import type { ModuleOptions } from '../types'
 
 export function getComponentPath (name: string): string {
@@ -9,7 +9,7 @@ export function getComponentPath (name: string): string {
 }
 
 export function resolveComponents (config: ModuleOptions) {
-  const { components, subComponents, icon } = config
+  const { components, subComponents, icon, cache } = config
   const icons = icon !== false ? genIconPresets(icon, iconLibraryName) : []
   const allComponents = new Set([...components, ...icons])
   const subComponentsMap = Object.fromEntries<string>(
@@ -25,13 +25,13 @@ export function resolveComponents (config: ModuleOptions) {
     const [name, alias, from] = toArray(item)
     const componentName = subComponentsMap[name] || name
     const filePath = from !== iconLibraryName
-      ? `${libraryName}/${getComponentPath(componentName)}`
-      : from
+      ? await resolveComponentPath(getComponentPath(componentName), cache)
+      : await resolvePath(from)
 
     addComponent({
       export: name,
       name: alias || name,
-      filePath: await resolvePath(filePath)
+      filePath
     })
   })
 }

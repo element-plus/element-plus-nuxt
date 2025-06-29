@@ -1,12 +1,20 @@
 import type { Component } from 'vue'
 import { createResolver } from '@nuxt/kit'
 import type { NuxtConfigLayer } from '@nuxt/schema'
-import { allIcons } from './config'
+import { allIcons, libraryName } from './config'
 import type { PresetComponent } from './types'
 
 export function resolvePath (path: string): Promise<string> {
   const { resolvePath } = createResolver(import.meta.url)
   return resolvePath(path)
+}
+
+export async function resolveComponentPath (path: string, cache: boolean | undefined): Promise<string> {
+  if (cache) {
+    return `#build/${libraryName}-cache.mjs`
+  }
+
+  return await resolvePath(`${libraryName}/${path}`)
 }
 
 export function getLayersDir (layers: NuxtConfigLayer[]) {
@@ -40,8 +48,8 @@ export function toRegExp (arr: string[], flags?: string): RegExp {
   return new RegExp(`\\b(${arr.join('|')})\\b`, flags)
 }
 
-export async function genLibraryImport ([name, as, from]: Required<Exclude<PresetComponent, string>>): Promise<string> {
-  const fromPath = await resolvePath(from)
+export async function genLibraryImport ([name, as, from]: Required<Exclude<PresetComponent, string>>, cache: boolean | undefined): Promise<string> {
+  const fromPath = await resolveComponentPath(from, cache)
   return `import { ${name} as ${as} } from '${fromPath}';\n`
 }
 
