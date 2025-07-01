@@ -183,9 +183,9 @@ export interface ModuleOptions extends TransformOptions {
    */
   installMethods: Array<'ElLoading' | 'ElMessage' | 'ElMessageBox' | 'ElNotification'>
   /**
-   * Whether to cache the element-plus components and directives.
+   * Whether to cache the element-plus components and directives. **Only effective in development mode**.
    *
-   * If you enable this feature, you will get faster loading speed in development mode. However, please note that this will make the `defaultLocale` ineffective in development mode.
+   * If you enable this feature, you will get faster loading speed in development mode.
    *
    * @default 'false'
    */
