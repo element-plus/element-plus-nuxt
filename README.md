@@ -117,11 +117,9 @@ e.g. `'zh-cn'`
 - Type: `boolean`
 - Default: `false`
 
-Whether to cache the element-plus components and directives.
+Whether to cache the element-plus components and directives. **Only effective in development mode**.
 
-> [!WARNING]
-> If you enable this feature, you will get faster loading speed in development mode.
-> However, please note that this will make the `defaultLocale` ineffective in development mode.
+If you enable this feature, you will get faster loading speed in development mode.
 
 ### globalConfig
 

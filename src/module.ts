@@ -32,12 +32,17 @@ export default defineNuxtModule<ModuleOptions>({
   setup (options, nuxt) {
     const layers = getLayersDir(nuxt.options._layers)
 
+    // disable the `cache` option when building applications
+    if (!nuxt.options.dev) {
+      options.cache = false
+    }
+
     resolveOptions(options)
     resolveThemes(options)
     resolveBaseImports(options)
     nuxt.options.imports.autoImport !== false && resolveImports(options)
     nuxt.options.components !== false && resolveComponents(options)
-    options.cache && addTemplate(resolveCache())
+    options.cache && addTemplate(resolveCache(options))
     options.globalConfig && addPluginTemplate(resolveGlobalConfig(options))
 
     if (nuxt.options.ssr !== false) {
