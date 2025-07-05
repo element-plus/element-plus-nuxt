@@ -121,6 +121,27 @@ Whether to cache the element-plus components and directives. **Only effective in
 
 If you enable this feature, you will get faster loading speed in development mode.
 
+### themeChalk
+
+- Type: `object`
+
+Configure SCSS variables for generating custom themes. **Only effective when `importStyle` is `scss`**.
+
+e.g.
+
+```ts
+{
+  $colors: {
+    primary: { base: 'rgba(107,33,168, 1)' }
+  },
+  dark: {
+    $colors: {
+      primary: { base: 'rgb(242, 216, 22)' }
+    }
+  }
+}
+```
+
 ### globalConfig
 
 - Type: `object`

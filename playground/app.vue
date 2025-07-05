@@ -43,7 +43,7 @@ function changeTheme () {
 </script>
 
 <template>
-  <el-config-provider>
+  <el-config-provider namespace="ep">
     <el-container>
       <el-header>
         <header-menu />
