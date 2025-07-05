@@ -20,7 +20,7 @@ export function resolveThemeChalk (config: ModuleOptions) {
     }
   })
 
-  if (namespace) {
+  if (namespace && namespace !== 'el') {
     files.push(genNamespaceFile())
   }
 

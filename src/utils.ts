@@ -31,7 +31,11 @@ export function getLayersDir (layers: NuxtConfigLayer[]) {
 }
 
 export function isObject (value: any): value is Record<string, any> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value)
+  return typeof value === 'object' && value !== null && !isArray(value)
+}
+
+export function isFunction (value: any): value is Function {
+  return typeof value === 'function'
 }
 
 export function isArray (value: any): value is any[] {
