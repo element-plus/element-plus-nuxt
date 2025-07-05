@@ -1,5 +1,7 @@
 import type { ElIdInjectionContext, ElZIndexInjectionContext, ConfigProviderContext } from 'element-plus'
 
+export type Themes = 'dark'
+
 /** name: export name from the library, as: the name you want to use in your project, from: the name of library */
 export type PresetComponent = string | [name: string, as?: string, from?: string]
 
@@ -14,6 +16,31 @@ export interface TransformOptions {
   include: RegExp[]
   exclude: RegExp[]
 }
+
+export type ScssVariables<Key extends string, Value = string> = {
+  [k in Key]?: Value
+} & {
+  [k: string]: Value
+}
+
+export interface ScssChalk {
+  '$colors'?: Partial<Record<'success' | 'warning' | 'danger' | 'error' | 'info', { base?: string }>> & ScssVariables<'white' | 'black', string | { base?: string }>
+  '$text-color'?: ScssVariables<'primary' | 'regular' | 'secondary' | 'placeholder' | 'disabled'>
+  '$bg-color'?: ScssVariables<'' | 'page' | 'overlay'>
+  '$border-color'?: ScssVariables<'' | 'light' | 'lighter' | 'extra-light' | 'dark' | 'darker'>
+  '$fill-color'?: ScssVariables<'' | 'light' | 'lighter' | 'extra-light' | 'dark' | 'darker' | 'blank'>
+  '$border-radius'?: ScssVariables<'base' | 'small' | 'round' | 'circle'>
+  '$box-shadow'?: ScssVariables<'' | 'light' | 'lighter' | 'dark', string | string[]>
+  '$font-family'?: ScssVariables<''>
+  '$font-size'?: ScssVariables<'extra-large' | 'large' | 'medium' | 'base' | 'small' | 'extra-small'>
+  '$z-index'?: ScssVariables<'normal' | 'top' | 'popper'>
+  '$common-component-size'?: ScssVariables<'large' | 'default' | 'small'>
+  '$overlay-color'?: ScssVariables<'' | 'light' | 'lighter'>
+  '$mask-color'?: ScssVariables<'' | 'extra-light'>
+  [key: `$${string}`]: string | undefined | ScssVariables<string, string | string[] | ScssVariables<string>>
+}
+
+export type ThemeChalk = ScssChalk & Partial<Record<Themes, ScssChalk>>
 
 export interface ModuleOptions extends TransformOptions {
   /**
@@ -86,7 +113,7 @@ export interface ModuleOptions extends TransformOptions {
    */
   baseImports: PresetImport[]
   /**
-   * import style css or sass(scss) with components
+   * import style css or scss with components
    *
    * @default 'css'
    *
@@ -103,7 +130,7 @@ export interface ModuleOptions extends TransformOptions {
    *  ['dark']
    * ```
    */
-  themes: Array<'dark'>
+  themes: Themes[]
   /**
    * A list of component names that have no styles, so resolving their styles file should be prevented
    *
@@ -190,4 +217,8 @@ export interface ModuleOptions extends TransformOptions {
    * @default 'false'
    */
   cache?: boolean
+  /**
+   * Configure SCSS variables for generating custom themes. **Only effective when `importStyle` is `scss`**.
+   */
+  themeChalk?: ThemeChalk
 }
