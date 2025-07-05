@@ -64,16 +64,21 @@ ${genScssVariables(config)}
       if (isArray(value)) {
         return `(${value.join(', ')})`
       } else if (isObject(value)) {
-        return `(${Object.entries(value).map(([k, v]) => `'${k}': ${genValue(v)}`).join(', ')})`
+        return `(${Object.entries(value).reduce((all, [k, v]) => {
+          if (!v) { return all }
+          all.push(`'${k}': ${genValue(v)}`)
+          return all
+        }, [] as string[]).join(', ')})`
       } else {
         return value
       }
     }
 
-    return Object.entries(config).map(([key, value]) => {
-      if (!value) { return '' }
-      return `  ${key}: ${genValue(value)}`
-    }).join(',\n')
+    return Object.entries(config).reduce((all, [key, value]) => {
+      if (!value) { return all }
+      all.push(`  ${key}: ${genValue(value)}`)
+      return all
+    }, [] as string[]).join(',\n')
   }
 
   return files
