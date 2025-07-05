@@ -22,8 +22,8 @@ export function resolveOptions (config: ModuleOptions) {
   nuxt.options.vite.css ||= {}
   nuxt.options.vite.css.preprocessorOptions ||= {}
   nuxt.options.vite.css.preprocessorOptions.scss ||= {}
-  nuxt.options.vite.css.preprocessorOptions.scss.api = 'modern-compiler'
-  nuxt.options.webpack.loaders.scss.api = 'modern-compiler'
+  nuxt.options.vite.css.preprocessorOptions.scss.api ??= 'modern-compiler'
+  nuxt.options.webpack.loaders.scss.api ??= 'modern-compiler'
 
   if (importStyle === 'scss' && themeChalk) {
     const keys = Object.keys(themeChalk)
