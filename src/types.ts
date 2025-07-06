@@ -17,11 +17,7 @@ export interface TransformOptions {
   exclude: RegExp[]
 }
 
-export type ScssVariables<Key extends string, Value = string> = {
-  [k in Key]?: Value
-} & {
-  [k: string]: Value
-}
+export type ScssVariables<Key extends string, Value = string> = { [k in Key]?: Value } & { [k: string]: Value }
 
 export interface ScssChalk {
   '$colors'?: Partial<Record<'success' | 'warning' | 'danger' | 'error' | 'info', { base?: string }>> & ScssVariables<'white' | 'black', string | { base?: string }>

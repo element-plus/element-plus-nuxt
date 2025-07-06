@@ -1,7 +1,7 @@
 import { useNuxt } from '@nuxt/kit'
 import { libraryName, optimizeDeps } from '../config'
-import type { ModuleOptions, Themes } from '../types'
 import { isFunction } from '../utils'
+import type { ModuleOptions, Themes } from '../types'
 
 export function resolveOptions (config: ModuleOptions) {
   const { cache, importStyle, namespace, themeChalk } = config
@@ -26,8 +26,11 @@ export function resolveOptions (config: ModuleOptions) {
   nuxt.options.webpack.loaders.scss.api ??= 'modern-compiler'
 
   if (importStyle === 'scss' && themeChalk) {
-    const keys = Object.keys(themeChalk)
     const files: Array<'namespace' | 'common' | Themes> = []
+    const keys = Object.keys(themeChalk) as (keyof typeof themeChalk)[]
+    const themes = keys.filter((key) => {
+      return !key.startsWith('$') && themeChalk[key] && Object.keys(themeChalk[key]).length
+    }) as Themes[]
 
     if (namespace && namespace !== 'el') {
       files.push('namespace')
@@ -35,7 +38,7 @@ export function resolveOptions (config: ModuleOptions) {
     if (keys.some(key => key.startsWith('$'))) {
       files.push('common')
     }
-    files.push(...keys.filter(key => !key.startsWith('$')) as Themes[])
+    files.push(...themes)
 
     const additionalData = files.reduce((all, item) => {
       all += `@use "${nuxt.options.buildDir}/${libraryName}-scss-${item}.scss";`
@@ -43,8 +46,8 @@ export function resolveOptions (config: ModuleOptions) {
     }, '')
 
     async function genAdditionalData (old: string | Function | undefined, source: string, ...arg: unknown[]) {
-      const res = isFunction(old) ? await old(source, ...arg) : (old ?? '') + source
-      return additionalData + res
+      const content = isFunction(old) ? await old(source, ...arg) : (old ?? '') + source
+      return additionalData + content
     }
 
     if (additionalData) {

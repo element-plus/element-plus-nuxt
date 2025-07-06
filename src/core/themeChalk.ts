@@ -1,7 +1,7 @@
 import type { NuxtTemplate } from '@nuxt/schema'
 import { libraryName } from '../config'
-import type { ModuleOptions, ScssChalk, ScssVariables, Themes } from '../types'
 import { isArray, isObject, resolveComponentPath } from '../utils'
+import type { ModuleOptions, ScssChalk, ScssVariables, Themes } from '../types'
 
 export function resolveThemeChalk (config: ModuleOptions) {
   const { themeChalk, namespace } = config
@@ -29,8 +29,8 @@ export function resolveThemeChalk (config: ModuleOptions) {
   }
 
   themes.forEach((type) => {
-    const config = themeChalk[type] as ScssChalk
-    if (Object.keys(config).length) {
+    const config = themeChalk[type]
+    if (config && Object.keys(config).length) {
       files.push(genThemeChalkFile(type, config))
     }
   })
