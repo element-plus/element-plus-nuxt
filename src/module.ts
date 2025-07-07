@@ -65,7 +65,7 @@ export default defineNuxtModule<ModuleOptions>({
         transformDirectives: name => resolveDirectives(options, name)
       }))
 
-      if (options.defaultLocale && options.defaultLocale !== 'en') {
+      if (options.defaultLocale !== 'en') {
         config.plugins.push(localePlugin.vite({
           sourcemap: nuxt.options.sourcemap[mode],
           locale: options.defaultLocale
@@ -88,7 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
           transformDirectives: name => resolveDirectives(options, name)
         }))
 
-        if (options.defaultLocale && options.defaultLocale !== 'en') {
+        if (options.defaultLocale !== 'en') {
           config.plugins.push(localePlugin.webpack({
             sourcemap: nuxt.options.sourcemap[mode],
             locale: options.defaultLocale
