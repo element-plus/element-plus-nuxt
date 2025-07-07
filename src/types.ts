@@ -163,7 +163,7 @@ export interface ModuleOptions extends TransformOptions {
    * @default 'en'
    * @example 'zh-cn'
    */
-  defaultLocale?: string
+  defaultLocale: string
   /**
    * Set global configuration, such as modifying the default size and z-index of the component.
    *

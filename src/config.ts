@@ -111,6 +111,7 @@ export const defaults: ModuleOptions = {
   include: defaultInclude,
   exclude: defaultExclude,
   namespace: 'el',
+  defaultLocale: 'en',
   appendTo: [],
   installMethods: [],
   icon: 'ElIcon'

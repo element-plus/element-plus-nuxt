@@ -4,8 +4,8 @@ import { camelize, resolveComponentPath } from '../utils'
 
 export function resolveGlobalConfig (config: ModuleOptions) {
   const { globalConfig, cache, defaultLocale } = config
-  const needLocale = !!(cache && defaultLocale)
-  const locale = camelize(defaultLocale ?? '')
+  const needLocale = !!(cache && defaultLocale !== 'en')
+  const locale = camelize(defaultLocale)
   let provideConfig = JSON.stringify(globalConfig)
 
   if (needLocale) {
