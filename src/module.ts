@@ -11,6 +11,7 @@ import {
   resolveOptions,
   resolveStyles,
   resolveTeleports,
+  resolveThemeChalk,
   resolveThemes,
   resolveMethods,
   transformPlugin,
@@ -44,6 +45,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.components !== false && resolveComponents(options)
     options.cache && addTemplate(resolveCache(options))
     options.globalConfig && addPluginTemplate(resolveGlobalConfig(options))
+    options.importStyle === 'scss' && options.themeChalk && resolveThemeChalk(options).map(addTemplate)
 
     if (nuxt.options.ssr !== false) {
       addPluginTemplate(resolveInjection(options))
