@@ -27,6 +27,7 @@ export function getLayersDir (layers: readonly NuxtConfigLayer[]) {
     const srcDir = layer.config.srcDir || layer.cwd
     if (
       srcDir.includes('node_modules') &&
+      isObject(layer.config.elementPlus) &&
       layer.config.elementPlus?.importStyle !== false
     ) {
       list.push(srcDir)
