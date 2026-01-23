@@ -1,10 +1,18 @@
 import { addImportsSources } from '@nuxt/kit'
-import { allMethods, iconLibraryName, libraryName } from '../config'
-import { genIconPresets, resolveComponentPath, resolvePath, toArray } from '../utils'
+import { allMethods, iconLibraryName } from '../config'
+import {
+  genIconPresets,
+  resolveComponentPath,
+  resolvePath,
+  toArray
+} from '../utils'
 import type { ModuleOptions, PresetImport } from '../types'
 import { getComponentPath } from './index'
 
-function _resolveImports (imports: Set<PresetImport>, cache: boolean | undefined) {
+function _resolveImports (
+  imports: Set<PresetImport>,
+  cache: boolean | undefined
+) {
   imports.forEach(async ([name, path]) => {
     addImportsSources({
       from: await resolveComponentPath(path, cache),

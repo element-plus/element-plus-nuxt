@@ -9,7 +9,10 @@ export function resolvePath (path: string): Promise<string> {
   return resolvePath(path)
 }
 
-export async function resolveComponentPath (path: string, cache: boolean | undefined): Promise<string> {
+export async function resolveComponentPath (
+  path: string,
+  cache: boolean | undefined
+): Promise<string> {
   if (cache) {
     return `#build/${libraryName}-cache.mjs`
   }
@@ -17,12 +20,15 @@ export async function resolveComponentPath (path: string, cache: boolean | undef
   return await resolvePath(`${libraryName}/${path}`)
 }
 
-export function getLayersDir (layers: NuxtConfigLayer[]) {
+export function getLayersDir (layers: readonly NuxtConfigLayer[]) {
   const list = []
 
   for (const layer of layers) {
     const srcDir = layer.config.srcDir || layer.cwd
-    if (srcDir.includes('node_modules') && layer.config.elementPlus?.importStyle !== false) {
+    if (
+      srcDir.includes('node_modules') &&
+      layer.config.elementPlus?.importStyle !== false
+    ) {
       list.push(srcDir)
     }
   }
@@ -43,7 +49,11 @@ export function isArray (value: any): value is any[] {
 }
 
 export function isVueComponent (value: any): value is Component {
-  return typeof value === 'object' && value.name && (value.props || value.emits || value.setup || value.render)
+  return (
+    typeof value === 'object' &&
+    value.name &&
+    (value.props || value.emits || value.setup || value.render)
+  )
 }
 
 export function toArray<T extends any | any[]> (
@@ -56,7 +66,10 @@ export function toRegExp (arr: string[], flags?: string): RegExp {
   return new RegExp(`\\b(${arr.join('|')})\\b`, flags)
 }
 
-export async function genLibraryImport ([name, as, from]: Required<Exclude<PresetComponent, string>>, cache: boolean | undefined): Promise<string> {
+export async function genLibraryImport (
+  [name, as, from]: Required<Exclude<PresetComponent, string>>,
+  cache: boolean | undefined
+): Promise<string> {
   const fromPath = await resolveComponentPath(from, cache)
   return `import { ${name} as ${as} } from '${fromPath}';\n`
 }
@@ -66,7 +79,10 @@ export async function genSideEffectsImport (from: string): Promise<string> {
   return `import '${fromPath}';\n`
 }
 
-export function genIconPresets (prefix: string, from?: string): Exclude<PresetComponent, string>[] {
+export function genIconPresets (
+  prefix: string,
+  from?: string
+): Exclude<PresetComponent, string>[] {
   return allIcons.map((name) => {
     return [name, `${prefix}${name}`, from] as Exclude<PresetComponent, string>
   })
