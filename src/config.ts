@@ -51,6 +51,7 @@ const allDirectives: PresetDirectives = {
 
 const allSubComponents: Record<string, string[]> = {
   ElAnchor: ['ElAnchorLink'],
+  ElAvatar: ['ElAvatarGroup'],
   ElBreadcrumb: ['ElBreadcrumbItem'],
   ElButton: ['ElButtonGroup'],
   ElCarousel: ['ElCarouselItem'],
