@@ -3,7 +3,11 @@ name: Release
 on:
   push:
     tags:
-      - 'v**'
+      - "v**"
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   release:
@@ -32,8 +36,6 @@ jobs:
 
       - name: Publish
         run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
       - run: npx changelogithub
         env:
