@@ -32,7 +32,7 @@ npm i element-plus @element-plus/nuxt -D
 ```
 
 > [!WARNING]
-> If you are using `pnpm`, please note that the [dayjs](https://github.com/iamkun/dayjs) package used internally by element-plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+> If you are using `pnpm`, please note that the [dayjs](https://github.com/iamkun/dayjs) package used internally by Element Plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 > In order to ensure that it can be converted into a JavaScript modules before startup, you need to configure pnpm to hoist dependencies.
 > For pnpm 10.x and earlier, add the following configuration to a `.npmrc` file in the project root:
 >
@@ -132,7 +132,7 @@ e.g. `'zh-cn'`
 - Type: `boolean`
 - Default: `false`
 
-Whether to cache the element-plus components and directives. **Only effective in development mode**.
+Whether to cache the Element Plus components and directives. **Only effective in development mode**.
 
 If you enable this feature, you will get faster loading speed in development mode.
 
