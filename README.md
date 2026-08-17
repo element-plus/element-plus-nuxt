@@ -25,19 +25,34 @@
 
 ## Installation
 
-> [!WARNING]
-> Since the [dayjs](https://github.com/iamkun/dayjs) used internally by element-plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), in order to ensure that it can be converted into a JavaScript modules before startup, you need to add a `.npmrc` file to the root directory of the project and add the following configuration:
-> ```
-> shamefully-hoist=true
-> node-linker=hoisted
-> ```
-> Or install the `dayjs` dependency separately.
-
 ```bash
 npx nuxi@latest module add element-plus
 # or
 npm i element-plus @element-plus/nuxt -D
 ```
+
+> [!WARNING]
+> If you are using `pnpm`, please note that the [dayjs](https://github.com/iamkun/dayjs) package used internally by Element Plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+> In order to ensure that it can be converted into a JavaScript modules before startup, you need to configure pnpm to hoist dependencies.
+> For pnpm 10.5.x and earlier, add the following configuration to a `.npmrc` file in the project root:
+>
+> ```ini
+> shamefully-hoist=true
+> node-linker=hoisted
+> ```
+>
+> For pnpm 10.6.x and later, add the following configuration to `pnpm-workspace.yaml`:
+>
+> ```yaml
+> shamefullyHoist: true
+> nodeLinker: hoisted
+> ```
+>
+> Alternatively, you can install the dayjs dependency explicitly in your project:
+>
+> ```bash
+> pnpm add dayjs
+> ```
 
 ## Configuration
 
@@ -117,7 +132,7 @@ e.g. `'zh-cn'`
 - Type: `boolean`
 - Default: `false`
 
-Whether to cache the element-plus components and directives. **Only effective in development mode**.
+Whether to cache the Element Plus components and directives. **Only effective in development mode**.
 
 If you enable this feature, you will get faster loading speed in development mode.
 
@@ -196,7 +211,7 @@ If there are directives that are not imported automatically from Element Plus, y
 
 If you wish to add automatically import content from Element Plus, you can add it here.
 
-e.g. 
+e.g.
 
 ```ts
 [
