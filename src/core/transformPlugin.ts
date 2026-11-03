@@ -93,7 +93,7 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
         return {
           code: s.toString(),
           map: sourcemap
-            ? s.generateMap({ source: id, includeContent: true })
+            ? s.generateMap({ source: id, includeContent: true, hires: true })
             : undefined
         }
       }
