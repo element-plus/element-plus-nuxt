@@ -25,7 +25,7 @@ export const localePlugin = createUnplugin((options: LocalePluginOptions) => {
         return {
           code: s.toString(),
           map: options.sourcemap
-            ? s.generateMap({ source: id, includeContent: true })
+            ? s.generateMap({ source: id, includeContent: true, hires: true })
             : undefined
         }
       }
