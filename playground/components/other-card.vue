@@ -1,9 +1,4 @@
-<script setup lang="ts">
-const count = ref(0)
-const load = () => {
-  count.value += 2
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <el-card class="mb-5">
@@ -48,12 +43,6 @@ const load = () => {
           </p>
         </div>
       </el-scrollbar>
-
-      <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-        <li v-for="i in count" :key="i" class="infinite-list-item">
-          {{ i }}
-        </li>
-      </ul>
 
       <div class="splitter">
         <el-splitter>
