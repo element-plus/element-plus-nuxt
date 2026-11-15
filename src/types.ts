@@ -157,7 +157,7 @@ export interface ModuleOptions extends TransformOptions {
   /**
    * Global component className prefix.
    *
-   * When you change the global namespace, you must change it here as well.
+   * The module injects it into the global config automatically, so you don't need to wrap your app with `<el-config-provider>` just to configure the namespace.
    *
    * @default 'el'
    */
@@ -189,6 +189,8 @@ export interface ModuleOptions extends TransformOptions {
   defaultLocale: string
   /**
    * Set global configuration, such as modifying the default size and z-index of the component.
+   *
+   * When a custom `namespace` is configured, it is injected here automatically and takes precedence over this value.
    *
    * @example
    * ```ts

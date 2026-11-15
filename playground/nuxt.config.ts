@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     themes: ['dark'],
     namespace: 'ep',
     injectionID: { prefix: 100, current: 1 },
-    globalConfig: { size: 'small', zIndex: 1000, namespace: 'ep' },
+    globalConfig: { size: 'small', zIndex: 1000 },
     themeChalk: {
       $colors: {
         primary: { base: 'rgba(107,33,168, 1)' },

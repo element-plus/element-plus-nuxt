@@ -94,7 +94,7 @@ e.g. `['ElLoading', 'ElMessage', 'ElMessageBox', 'ElNotification']`
 - Type: `string`
 - Default: `el`
 
-When you change the global namespace, you must change it here as well.
+Global component className prefix. The module injects it into the global config automatically, so you don't need to wrap your app with `<el-config-provider>` just to configure the namespace.
 
 ### defaultLocale
 
@@ -139,6 +139,8 @@ e.g.
 - Type: `object`
 
 Set global configuration, such as modifying the default `size` and `z-index` of the component.
+
+When a custom [`namespace`](#namespace) is configured, it is injected here automatically and takes precedence over this value.
 
 e.g. `{ size: 'small', zIndex: 3000 }`
 
