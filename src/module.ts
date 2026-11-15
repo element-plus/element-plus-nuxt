@@ -26,7 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
     name: libraryName,
     configKey: 'elementPlus',
     compatibility: {
-      nuxt: '>=3'
+      nuxt: '>=3.10'
     }
   },
   defaults,

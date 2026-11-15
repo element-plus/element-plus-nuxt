@@ -31,29 +31,6 @@ npx nuxi@latest module add element-plus
 npm i element-plus @element-plus/nuxt -D
 ```
 
-> [!WARNING]
-> If you are using `pnpm`, please note that the [dayjs](https://github.com/iamkun/dayjs) package used internally by Element Plus is not a [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
-> In order to ensure that it can be converted into a JavaScript modules before startup, you need to configure pnpm to hoist dependencies.
-> For pnpm 10.5.x and earlier, add the following configuration to a `.npmrc` file in the project root:
->
-> ```ini
-> shamefully-hoist=true
-> node-linker=hoisted
-> ```
->
-> For pnpm 10.6.x and later, add the following configuration to `pnpm-workspace.yaml`:
->
-> ```yaml
-> shamefullyHoist: true
-> nodeLinker: hoisted
-> ```
->
-> Alternatively, you can install the dayjs dependency explicitly in your project:
->
-> ```bash
-> pnpm add dayjs
-> ```
-
 ## Configuration
 
 > [!WARNING]
@@ -61,11 +38,11 @@ npm i element-plus @element-plus/nuxt -D
 
 ```ts
 export default defineNuxtConfig({
-  modules: [
-    '@element-plus/nuxt'
-  ],
-  elementPlus: { /** Options */ }
-})
+  modules: ["@element-plus/nuxt"],
+  elementPlus: {
+    /** Options */
+  },
+});
 ```
 
 ## Usage

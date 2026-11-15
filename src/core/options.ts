@@ -1,6 +1,6 @@
 import { useNuxt } from '@nuxt/kit'
-import { libraryName, optimizeDeps } from '../config'
-import { isFunction } from '../utils'
+import { libraryName } from '../config'
+import { isFunction, resolveOptimizeDeps } from '../utils'
 import type { ModuleOptions, Themes } from '../types'
 
 export function resolveOptions (config: ModuleOptions) {
@@ -10,7 +10,7 @@ export function resolveOptions (config: ModuleOptions) {
   nuxt.options.build.transpile.push(libraryName)
   nuxt.options.vite.optimizeDeps ||= {}
   nuxt.options.vite.optimizeDeps.include ||= []
-  nuxt.options.vite.optimizeDeps.include.push(...optimizeDeps)
+  nuxt.options.vite.optimizeDeps.include.push(...resolveOptimizeDeps(nuxt.options.rootDir))
 
   if (cache) {
     nuxt.options.vite.optimizeDeps.include.push(libraryName)

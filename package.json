@@ -8,13 +8,18 @@
     ".": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/module.mjs",
   "types": "./dist/types.d.mts",
   "files": [
     "dist"
   ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.20.0"
+  },
   "keywords": [
     "element-plus",
     "nuxt"

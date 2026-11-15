@@ -1,7 +1,11 @@
+import { readdirSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { dirname, join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import type { Component } from 'vue'
-import { createResolver } from '@nuxt/kit'
+import { createResolver, resolveModule } from '@nuxt/kit'
 import type { NuxtConfigLayer } from '@nuxt/schema'
-import { allIcons, libraryName } from './config'
+import { allIcons, libraryName, optimizeDeps } from './config'
 import type { PresetComponent } from './types'
 
 export function resolvePath (path: string): Promise<string> {
@@ -18,6 +22,64 @@ export async function resolveComponentPath (
   }
 
   return await resolvePath(`${libraryName}/${path}`)
+}
+
+/**
+ * `dayjs` and `lodash-unified` are CommonJS dependencies of element-plus. They have to be pre-bundled.
+ * Vite's nested `parent > dep` syntax resolves them relative to element-plus instead.
+ */
+export function resolveOptimizeDeps (rootDir: string): string[] {
+  let elementPlusEntry: string
+
+  try {
+    elementPlusEntry = resolveModule(libraryName, {
+      url: pathToFileURL(join(rootDir, 'package.json'))
+    })
+  } catch {
+    return optimizeDeps
+  }
+
+  const elementPlusRequire = createRequire(elementPlusEntry)
+  const withParent = (dep: string) => `${libraryName} > ${dep}`
+
+  const deps = optimizeDeps
+    .filter(dep => !dep.includes('*'))
+    .map(dep => withParent(dep))
+
+  for (const glob of optimizeDeps.filter(dep => dep.includes('*'))) {
+    deps.push(...expandGlob(elementPlusRequire, glob).map(withParent))
+  }
+
+  return deps
+}
+
+function expandGlob (require: NodeJS.Require, glob: string): string[] {
+  const slashIndex = glob.indexOf('/')
+  const pattern = glob.slice(slashIndex + 1)
+  const patternSlash = pattern.lastIndexOf('/')
+
+  if (slashIndex < 0 || patternSlash < 0) {
+    return []
+  }
+
+  const packageName = glob.slice(0, slashIndex)
+  const dir = pattern.slice(0, patternSlash)
+  const extension = pattern.slice(patternSlash + 1).replace('*', '')
+
+  let packageDir: string
+  try {
+    packageDir = dirname(require.resolve(packageName))
+  } catch {
+    return []
+  }
+
+  try {
+    return readdirSync(join(packageDir, dir))
+      .filter(file => file.endsWith(extension))
+      .map(file => `${packageName}/${dir}/${file}`)
+  } catch {
+    return []
+  }
 }
 
 export function getLayersDir (layers: readonly NuxtConfigLayer[]) {
