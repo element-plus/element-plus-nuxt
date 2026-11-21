@@ -210,9 +210,9 @@ export interface ModuleOptions extends TransformOptions {
   /**
    * Whether to cache the element-plus components and directives. **Only effective in development mode**.
    *
-   * If you enable this feature, you will get faster loading speed in development mode.
+   * Enabled by default, this gives you faster loading speed in development mode. Set it to `false` to disable it.
    *
-   * @default 'false'
+   * @default 'true'
    */
   cache?: boolean
   /**

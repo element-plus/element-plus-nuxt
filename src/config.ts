@@ -115,5 +115,6 @@ export const defaults: ModuleOptions = {
   defaultLocale: 'en',
   appendTo: [],
   installMethods: [],
-  icon: 'ElIcon'
+  icon: 'ElIcon',
+  cache: true
 }
