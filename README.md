@@ -107,11 +107,11 @@ e.g. `'zh-cn'`
 ### cache
 
 - Type: `boolean`
-- Default: `false`
+- Default: `true`
 
 Whether to cache the Element Plus components and directives. **Only effective in development mode**.
 
-If you enable this feature, you will get faster loading speed in development mode.
+Enabled by default, this gives you faster loading speed in development mode. Set it to `false` to disable it.
 
 ### themeChalk
 
