@@ -1,5 +1,6 @@
 import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
+import { findStaticImports, parseStaticImport } from 'mlly'
 import type { NuxtOptions } from '@nuxt/schema'
 import { allMethods, libraryName } from '../config'
 import {
@@ -11,19 +12,65 @@ import {
 import type { PresetComponent, TransformOptions } from '../types'
 
 interface PluginOptions extends TransformOptions {
-  layers: string[]
-  cache: boolean | undefined
-  sourcemap?: NuxtOptions['sourcemap']['client']
-  transformStyles: (name: string) => undefined | string
-  transformDirectives: (name: string) => undefined | [name: string, path: string, style?: string]
+  layers: string[];
+  cache: boolean | undefined;
+  sourcemap?: NuxtOptions['sourcemap']['client'];
+  transformStyles: (name: string) => undefined | string;
+  transformDirectives: (
+    name: string,
+  ) => undefined | [name: string, path: string, style?: string];
 }
 
-const componentsRegExp = /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
-const directivesRegExp = /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]*[^)]*\)/g
+const componentsRegExp =
+  /(?<=[ (])_?resolveComponent\(\s*["'](lazy-|Lazy)?([^'"]*?)["'][\s,]*[^)]*\)/g
+const lazyComponentsRegExp =
+  /\/virtual:nuxt-component:(?:lazy(?:-[A-Za-z]+)?|client|server):([A-Za-z0-9_$]+):/
+const directivesRegExp =
+  /(?<=[ (])_?resolveDirective\(\s*["']([^'"]*?)["'][\s,]*[^)]*\)/g
 const methodsRegExp = toRegExp(allMethods, 'g')
 
+function collectComponentNames (code: string): Set<string> {
+  const names = new Set<string>()
+
+  if (code.includes(libraryName) || code.includes('virtual:nuxt-component:')) {
+    const imports = findStaticImports(code)
+
+    for (const statement of imports) {
+      if (statement.specifier.includes('virtual:nuxt-component:')) {
+        const match = lazyComponentsRegExp.exec(statement.specifier)
+        if (match && match[1]) {
+          names.add(match[1])
+        }
+        continue
+      }
+
+      if (!statement.specifier.includes(libraryName)) {
+        continue
+      }
+
+      const { namedImports } = parseStaticImport(statement)
+
+      if (namedImports) {
+        for (const name of Object.keys(namedImports)) {
+          names.add(name)
+        }
+      }
+    }
+  }
+
+  return names
+}
+
 export const transformPlugin = createUnplugin((options: PluginOptions) => {
-  const { cache, layers, include, exclude, sourcemap, transformStyles, transformDirectives } = options
+  const {
+    cache,
+    layers,
+    include,
+    exclude,
+    sourcemap,
+    transformStyles,
+    transformDirectives
+  } = options
 
   return {
     name: `${libraryName}:transform`,
@@ -48,6 +95,10 @@ export const transformPlugin = createUnplugin((options: PluginOptions) => {
       const addStyles = (style?: string) => {
         style && styles.add(style)
       }
+
+      collectComponentNames(code).forEach((name) => {
+        addStyles(transformStyles(camelize(name)))
+      })
 
       s.replace(componentsRegExp, (full, lazy, name) => {
         addStyles(transformStyles(camelize(name)))

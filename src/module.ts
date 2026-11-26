@@ -34,6 +34,12 @@ export default defineNuxtModule<ModuleOptions>({
     resolveBaseImports({} as ModuleOptions)
   },
   setup (options, nuxt) {
+    const layers = getLayersDir(nuxt.options._layers)
+
+    // disable the `cache` option when building applications
+    if (!nuxt.options.dev) {
+      options.cache = false
+    }
     if (
       options.namespace !== defaults.namespace ||
       options.globalConfig?.namespace !== undefined
@@ -42,13 +48,6 @@ export default defineNuxtModule<ModuleOptions>({
         ...options.globalConfig,
         namespace: options.namespace
       }
-    }
-
-    const layers = getLayersDir(nuxt.options._layers)
-
-    // disable the `cache` option when building applications
-    if (!nuxt.options.dev) {
-      options.cache = false
     }
 
     resolveOptions(options)
